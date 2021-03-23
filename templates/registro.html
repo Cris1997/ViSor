@@ -1,0 +1,139 @@
+s{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+ .formsignup{
+    background: linear-gradient(0deg, rgba(108,85,163,1) 0%, rgba(177,165,206,1) 37%, rgba(255,255,255,1) 100%);/* #f8f9fa;-webkit-linear-gradient(bottom, #6c55a3,#f0f0f0);*/
+}
+
+.frame2{
+    background-color: white;
+    padding: 1cm;
+  
+}
+
+hr.new5 {
+  border: 3px solid  rgba(108,85,163,1);
+  border-radius: 5px;
+  width: 100%;
+}
+
+
+.row.form{
+    background-color: white
+}
+
+.encabezados{
+  color: #6C55A3;
+
+}
+
+
+</style>
+
+<div class="formsignup container-fluid mx-auto pt-3 pl-5 pr-5 ">
+        <div class="frame2 border bg-light rounded">
+                <div class="row justify-content-center">
+                    <div class="col-md-auto">
+                        <a href="{{url_for('index')}}">
+                            <img src="{{url_for('static', filename='images/kleo-logo.png')}}" height="50" class="img-fluid" width="300">
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <h3 class="register-heading">Registro</h3>
+                </div>
+                <div class="row">
+                    <hr class="new5">
+                </div>
+                <div class="row">
+                  <h5 class="encabezados">Datos personales</h5>
+                  <hr class="style14">
+                  <br>
+                </div>
+                <form method="POST">
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="name">Nombre(s):</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{ request.form['name']}}">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="paterno">Apellido Paterno:</label>
+                            <input type="text" class="form-control" name="paterno" placeholder="Apellido paterno" value="{{ request.form['paterno']}}">
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="materno">Apellido Materno:</label>
+                            <input type="text" class="form-control" name="materno" value="{{ request.form['materno']}}" placeholder="Apellido materno">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="genero">Género:</label>
+                            <select name="genero" class="form-control" value="{{ request.form['genero']}}">
+                              <option selected>Femenino</option>
+                              <option >Masculino</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-3">
+                            <label for="edoCivil">Estado civíl:</label>
+                            <select name="edoCivil" class="form-control" value="{{ request.form['edoCivil']}}">
+                              <option>Soltero(a)</option>
+                              <option>Casado(a)</option>
+                              <option>Divorciado(a)</option>
+                              <option>Viudo(a)</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="calle">Domicilio</label>
+                            <input type="text" class="form-control" name="calle" placeholder="Calle" value="{{ request.form['calle']}}">
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="numInt">Número interior</label>
+                            <input type="text" class="form-control" name="numInt" placeholder="#" value="{{ request.form['numInt']}}">
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="numExt">Número exterior</label>
+                            <input type="text" class="form-control" name="numExt" placeholder="#" value="{{ request.form['numExt']}}">
+                          </div>
+                        </div>
+                        
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="ciudad">Ciudad</label>
+                            <input type="text" class="form-control" name="ciudad" placeholder="Ciudad" value="{{ request.form['ciudad']}}">
+                          </div>
+                          <div class="form-group col-md-2">
+                            <label for="code">Código Postal</label>
+                            <input type="text" class="form-control" name="code" placeholder="C.P" value="{{ request.form['code']}}">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <h5 class="encabezados">Datos de contacto</h5>
+                          <hr class="style14">
+                          <br>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" class="form-control" name="email" placeholder="alguien@ejemplo.com.mx" value="{{ request.form['email']}}">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="psw">Télefono</label>
+                            <input type="number" class="form-control" name="psw" placeholder="55-53-07-89-76" value="{{ request.form['psws']}}">
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label for="formFile" class="form-label">Proporciona tu CV para conocer más sobre ti</label>
+                          <input class="form-control" type="file" id="formFile">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrarme</button>
+                      </form>
+        </div>
+</div>
+{% endblock %}
