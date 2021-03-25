@@ -10,7 +10,7 @@
 .frame2{
     background-color: white;
     padding: 1cm;
-  
+
 }
 
 hr.new5 {
@@ -31,6 +31,12 @@ hr.new5 {
 
 
 </style>
+
+<script>
+$(function () {
+    $("#datepicker").datepicker({ dateFormat: 'dd-mm-yy' });
+});
+</script>
 
 <div class="formsignup container-fluid mx-auto pt-3 pl-5 pr-5 ">
         <div class="frame2 border bg-light rounded">
@@ -57,60 +63,69 @@ hr.new5 {
                         <div class="form-row">
                           <div class="form-group col-md-4">
                             <label for="name">Nombre(s):</label>
-                            <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{ request.form['name']}}">
+                            <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{ request.form['name']}}" required>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="paterno">Apellido Paterno:</label>
-                            <input type="text" class="form-control" name="paterno" placeholder="Apellido paterno" value="{{ request.form['paterno']}}">
+                            <input type="text" class="form-control" name="paterno" placeholder="Apellido paterno" value="{{ request.form['paterno']}}" required>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="materno">Apellido Materno:</label>
-                            <input type="text" class="form-control" name="materno" value="{{ request.form['materno']}}" placeholder="Apellido materno">
+                            <input type="text" class="form-control" name="materno" value="{{ request.form['materno']}}" placeholder="Apellido materno" required>
                           </div>
                         </div>
                         <div class="form-row">
-                          <div class="form-group col-md-4">
-                            <label for="genero">Género:</label>
-                            <select name="genero" class="form-control" value="{{ request.form['genero']}}">
-                              <option selected>Femenino</option>
-                              <option >Masculino</option>
-                            </select>
+                          <div class= "form-group col-md-3">
+                              <label for="fecha">Fecha de nacimiento:</label>
+                              <input type="text" class="form-control" name="fecha" id="datepicker" value="{{ request.form['fecha'] }}" required>
                           </div>
-                        </div>
-                        <div class="form-row">
                           <div class="form-group col-md-3">
                             <label for="edoCivil">Estado civíl:</label>
-                            <select name="edoCivil" class="form-control" value="{{ request.form['edoCivil']}}">
-                              <option>Soltero(a)</option>
-                              <option>Casado(a)</option>
-                              <option>Divorciado(a)</option>
-                              <option>Viudo(a)</option>
+                            <select name="edoCivil" class="form-control" value="{{ request.form['edoCivil']}}" required>
+                              <option value="Soltero(a)">Soltero(a)</option>
+                              <option value="Casado(a)">Casado(a)</option>
+                              <option value="Divorciado(a)">Divorciado(a)</option>
+                              <option value="Viudo(a)">Viudo(a)</option>
                             </select>
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="calle">Domicilio</label>
-                            <input type="text" class="form-control" name="calle" placeholder="Calle" value="{{ request.form['calle']}}">
-                          </div>
-                          <div class="form-group col-md-3">
-                            <label for="numInt">Número interior</label>
-                            <input type="text" class="form-control" name="numInt" placeholder="#" value="{{ request.form['numInt']}}">
-                          </div>
-                          <div class="form-group col-md-3">
-                            <label for="numExt">Número exterior</label>
-                            <input type="text" class="form-control" name="numExt" placeholder="#" value="{{ request.form['numExt']}}">
-                          </div>
-                        </div>
-                        
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="ciudad">Ciudad</label>
-                            <input type="text" class="form-control" name="ciudad" placeholder="Ciudad" value="{{ request.form['ciudad']}}">
-                          </div>
-                          <div class="form-group col-md-2">
-                            <label for="code">Código Postal</label>
-                            <input type="text" class="form-control" name="code" placeholder="C.P" value="{{ request.form['code']}}">
+                            <label for="ciudad">Ciudad donde radicas:</label>
+                            <select name="ciudad" class="form-control" value="{{ request.form['ciudad']}}" required>
+                              <option value="Aguascalientes">Aguascalientes</option>
+                              <option value="Campeche">Campeche</option>
+                              <option value="Chetumal">Chetumal</option>
+                              <option value="Chihuahua">Chihuahua</option>
+                              <option value="Chilpancingo">Chilpancingo</option>
+                              <option value="Tuxtla Gutiérrez">Ciudad de México</option>
+                              <option value="Ciudad Victoria">Ciudad Victoria</option>
+                              <option value="Chetumal">Chetumal</option>
+                              <option value="Colima">Colima</option>
+                              <option value="Cuernavaca">Cuernavaca</option>
+                              <option value="Culiacán">Culiacán</option>
+                              <option value="Durango">Durango</option>
+                              <option value="Guanajuato">Guanajuato</option>
+                              <option value="Guadalajara">Guadalajara</option>
+                              <option value="Hermosillo">Hermosillo</option>
+                              <option value="La Paz">La Paz</option>
+                              <option value="Mérida">Mérida</option>
+                              <option value="Mexicali">Mexicali</option>
+                              <option value="Monterrey">Monterrey</option>
+                              <option value="Morelia">Morelia</option>
+                              <option value="Oaxaca">Oaxaca</option>
+                              <option value="Pachuca">Pachuca</option>
+                              <option value="Puebla">Puebla</option>
+                              <option value="Querétaro">Querétaro</option>
+                              <option value="Saltillo">Saltillo</option>
+                              <option value="San Luis Potosí">San Luis Potosí</option>
+                              <option value="Tepic">Tepic</option>
+                              <option value="Toluca">Toluca</option>
+                              <option value="Tuxtla Gutiérrez">Tuxtla Gutiérrez</option>
+                              <option value="Tlaxcala">Tlaxcala</option>
+                              <option value="Villahermosa">Villahermosa</option>
+                              <option value="Zacatecas">Zacatecas</option>
+                            </select>
                           </div>
                         </div>
                         <div class="row">
@@ -119,22 +134,61 @@ hr.new5 {
                           <br>
                         </div>
                         <div class="form-row">
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-md-4">
                             <label for="email">Correo electrónico</label>
                             <input type="email" class="form-control" name="email" placeholder="alguien@ejemplo.com.mx" value="{{ request.form['email']}}">
                           </div>
-                          <div class="form-group col-md-6">
-                            <label for="psw">Télefono</label>
-                            <input type="number" class="form-control" name="psw" placeholder="55-53-07-89-76" value="{{ request.form['psws']}}">
+                          <div class="form-group col-md-4">
+                            <label for="fijo">Télefono fijo</label>
+                            <input type="tel" class="form-control" name="fijo" placeholder="55-55-55-55-55" maxlength="10" value="{{ request.form['fijo']}}">
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label for="celular">Télefono celular</label>
+                             <input type="tel" class="form-control" name="celular" placeholder="55-55-55-55-55" maxlength="10" value="{{ request.form['celular']}}">
                           </div>
                         </div>
-                        <div class="mb-3">
-                          <div class="file-upload-wrapper">
-                            <input type="file" id="input-file-max-fs" class="file-upload" data-max-file-size="2M" />
+                        <div class= "form-row">
+                            <div class="form-group col-md-4">
+                                <label class="form-label" for="customFile">Adjunta tu CV</label>
+                                <input type="file" class="form-control" id="customFile" />
+                            </div>
+                        </div>
+                        <div class="row">
+                          <h5 class="encabezados">Información adicional</h5>
+                          <hr class="style14">
+                          <br>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="conocimiento">¿Cómo te enteraste de nosotros?</label>
+                            <select name="conomiento" class="form-control" value="{{ request.form['conocimiento']}}">
+                              <option value="Recomendación de un amigo">Recomendación de un amigo</option>
+                              <option value="Navegador web">Navegador web</option>
+                              <option value="Anuncio">Anuncio</option>
+                              <option value="Publicidad de instagram">Publicidad de instagram</option>
+                              <option value="Publicidad de facebook">Publicidad de facebook</option>
+                            </select>
                           </div>
+                          <div class="form-group col-md-6">
+                            <label for="perfil">¿Tienes experiencia en alguno de nuestros perfiles?</label>
+                            <select name="perfil" class="form-control" value="{{ request.form['perfil']}}">
+                              <option value="Mystery Shopper">Mystery Shopper</option>
+                              <option value="Encuestador">Encuestador</option>
+                              <option value="Entrevistador">Entrevistador</option>
+                              <option value="Ninguno">Ninguno</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="lugarExperiencia">¿En dónde realizaste esa experiencia previa? (Opcional)</label>
+                                <input type="text" class="form-control" name="lugarExperiencia" placeholder="Anota el lugar donde realizaste tu trabajo" value="{{ request.form['lugarExperiencia']}}">
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Registrarme</button>
                       </form>
         </div>
 </div>
+
+
 {% endblock %}

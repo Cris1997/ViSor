@@ -19,7 +19,9 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 @app.route('/')
 def index():
 	#return render_template('upload.html')
+	#return render_template('prueba.html')
     return render_template('index.html')
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
