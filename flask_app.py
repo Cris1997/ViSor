@@ -4,8 +4,10 @@ import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
 
+from functions import allowed_file
 
 UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads/'
+#UPLOAD_FOLDER='static/uploads'
 ALLOWED_EXTENSIONS = set(['pdf'])
 
 app = Flask(__name__)
@@ -14,14 +16,11 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS']=ALLOWED_EXTENSIONS
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+	return render_template('index.html')
 
 
 
@@ -53,17 +52,18 @@ def registro():
 	else:
 		return render_template('registro.html')
 	
-	if file and allowed_file(file.filename,ALLOWED_EXTENSIONS):
+	if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
 		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
+		file.save(os.path.join(app.config['UPLOAD_FOLDER']+"/cv",file.filename))
 		extension = filename.split(".")
 		extension = str(extension[1])
-		source = UPLOAD_FOLDER+"/"+filename
-		destination  = UPLOAD_FOLDER+"/"+name+paterno+materno+"."+extension
+		source = UPLOAD_FOLDER+"/cv/"+filename
+		destination  = UPLOAD_FOLDER+"/cv/"+name+paterno+materno+"."+extension
 		os.rename(source,destination)
-		flash(file.filename+ "sabed successfully")
+		flash('Tu registro fue exitoso')
+		return redirect(url_for('index'))
 	else:
-		flash("nO se puede")
+		return render_template('registro.html')
 	
 
 
@@ -94,7 +94,7 @@ def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
-if __name__ == '__main__':
-    app.run()
+#if __name__ == '__main__':
+#    app.run()
 
 
