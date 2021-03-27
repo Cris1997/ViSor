@@ -3,7 +3,7 @@ import os
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
-import string
+
 
 UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads/'
 ALLOWED_EXTENSIONS = set(['pdf'])
@@ -13,6 +13,10 @@ app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS']=ALLOWED_EXTENSIONS
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 
 @app.route('/')
@@ -40,24 +44,27 @@ def registro():
 		fecha = request.form['fecha']
 		ciudad = request.form['ciudad']
 		correo = request.form['correo']
-		fijo   = request.form['fijo']
+		fijo = request.form['fijo']
 		celular = request.form['celular']
 		conocimiento = request.form['conocimiento']
 		lugarExperiencia = request.form['lugarExperiencia']
 		perfil = request.form['perfil']
 		file = request.files['cv']
-		if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
-		    filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-            extension=filename.split(".")
-            extension=str(extension[1])
-            source=UPLOAD_FOLDER+"/"+filename
-            destination=UPLOAD_FOLDER+"/"+"HOLA"+"."+extension
-            os.rename(source,destination)
-            flash(file.filename+" saved succesfully")
-		return conocimiento
 	else:
 		return render_template('registro.html')
+	
+	if file and allowed_file(file.filename,ALLOWED_EXTENSIONS):
+		filename = secure_filename(file.filename)
+		file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
+		extension = filename.split(".")
+		extension = str(extension[1])
+		source = UPLOAD_FOLDER+"/"+filename
+		destination  = UPLOAD_FOLDER+"/"+name+paterno+materno+"."+extension
+		os.rename(source,destination)
+		flash(file.filename+ "sabed successfully")
+	else:
+		flash("nO se puede")
+	
 
 
 
@@ -85,3 +92,9 @@ def upload_image():
 def display_image(filename):
 	#print('display_image filename: ' + filename)
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
+
+if __name__ == '__main__':
+    app.run()
+
+
