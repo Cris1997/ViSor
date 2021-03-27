@@ -3,23 +3,20 @@ import os
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
 from werkzeug.utils import secure_filename
+import string
 
-
-UPLOAD_FOLDER='static/uploads/'
-
+UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads/'
+ALLOWED_EXTENSIONS = set(['pdf'])
 
 app = Flask(__name__)
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['ALLOWED_EXTENSIONS']=ALLOWED_EXTENSIONS
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-
 
 
 @app.route('/')
 def index():
-	#return render_template('upload.html')
-	#return render_template('prueba.html')
     return render_template('index.html')
 
 
@@ -40,16 +37,25 @@ def registro():
 		name = request.form['name']
 		paterno = request.form['paterno']
 		materno = request.form['materno']
-		genero  = request.form['genero']
-		edoCivil =  request.form['edoCivil']
-		calle  =  request.form['calle']
-		numInt =  request.form['numInt']
-		numExt =  request.form['numExt']
-		ciudad  =  request.form['ciudad']
-		code =  request.form['code']
-		email =  request.form['email']
-		number =  request.form['number']
-		return name
+		fecha = request.form['fecha']
+		ciudad = request.form['ciudad']
+		correo = request.form['correo']
+		fijo   = request.form['fijo']
+		celular = request.form['celular']
+		conocimiento = request.form['conocimiento']
+		lugarExperiencia = request.form['lugarExperiencia']
+		perfil = request.form['perfil']
+		file = request.files['cv']
+		if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
+		    filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+            extension=filename.split(".")
+            extension=str(extension[1])
+            source=UPLOAD_FOLDER+"/"+filename
+            destination=UPLOAD_FOLDER+"/"+"HOLA"+"."+extension
+            os.rename(source,destination)
+            flash(file.filename+" saved succesfully")
+		return conocimiento
 	else:
 		return render_template('registro.html')
 
