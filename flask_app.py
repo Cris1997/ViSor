@@ -2,27 +2,34 @@
 import os
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template
+from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
 
-from functions import allowed_file
+from functions import allowed_file, get_random_string
 
 UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads/'
 #UPLOAD_FOLDER='static/uploads'
 ALLOWED_EXTENSIONS = set(['pdf'])
 
 app = Flask(__name__)
+mail = Mail(app)
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'trabajoterminal2019a085@gmail.com'
+app.config['MAIL_PASSWORD'] = 'domokunsupermami97'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
+
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['ALLOWED_EXTENSIONS']=ALLOWED_EXTENSIONS
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-
-
 @app.route('/')
 def index():
 	return render_template('index.html')
-
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -60,11 +67,24 @@ def registro():
 		source = UPLOAD_FOLDER+"/cv/"+filename
 		destination  = UPLOAD_FOLDER+"/cv/"+name+paterno+materno+"."+extension
 		os.rename(source,destination)
-		flash('Tu registro fue exitoso')
-		return redirect(url_for('index'))
 	else:
+		flash('El archivo que subiste debe estar en formato pdf')
 		return render_template('registro.html')
 	
+	#Generar password temporal y guardar en la base de datos
+	password = get_random_string()
+	#Build mail body and recipients
+	msg = Message('Detalle de ingreso a la palataforma de ViSor', sender=("Registro existoso ViSor", "trabajoterminal2019a085@gmail.com"), recipients = [correo])
+	msg.html = render_template('correo.html', value = name, psw = password)
+	mail.send(msg)
+	return "Sent"
+
+@app.route('/changePassword')
+def changePassword():
+	name = 'Cristian'
+	return render_template('changePassword.html', nombre = name)
+
+
 
 
 
@@ -94,7 +114,7 @@ def display_image(filename):
 	return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
-#if __name__ == '__main__':
-#    app.run()
+if __name__ == '__main__':
+    app.run()
 
 
