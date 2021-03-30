@@ -74,7 +74,7 @@ def registro():
 	#Generar password temporal y guardar en la base de datos
 	password = get_random_string()
 	#Build mail body and recipients
-	msg = Message('Detalle de ingreso a la palataforma de ViSor', sender=("Registro existoso ViSor", "trabajoterminal2019a085@gmail.com"), recipients = [correo])
+	msg = Message('Detalle de ingreso a la plataforma de ViSor', sender=("Registro existoso ViSor", "trabajoterminal2019a085@gmail.com"), recipients = [correo])
 	msg.html = render_template('correo.html', value = name, psw = password)
 	mail.send(msg)
 	return render_template('signupSuccess.html')

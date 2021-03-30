@@ -19,11 +19,7 @@ db = SQLAlchemy(app)
 
 class Usuario(db.Model):
 
-<<<<<<< HEAD
-    __tablename__ = "comments2"
-=======
     __tablename__ = "usuarios"
->>>>>>> 2f1580d0e3367db8c98f649f883d7bc39476831d
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200))
