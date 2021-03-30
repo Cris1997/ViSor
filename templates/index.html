@@ -3,7 +3,7 @@
 
 {% block navbar %}
 <!--Navbar Start-->
-   <nav class="navbar navbar-expand-lg fixed-top navbar-kleo normal-nav">
+   <nav class="navbar navbar-expand-lg fixed-top navbar-kleo normal-nav yournav">
     <div class="container">
         <a class="navbar-brand logo" href="">
             <img src="{{url_for('static', filename='images/kleo-logo.png')}}" height="21">
@@ -15,16 +15,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto navbar-center" id="mySidenav">
                 <li class="nav-item active">
-                    <a href="#top" class="nav-link">Inicio</a>
+                    <a href="#top" class="nav-link">¿Quiénes somos?</a>
+                </li>
+                <!--
+                    <li class="nav-item">
+                    <a href="#mision" class="nav-link">¿Quiénes somos?</a>
+                    </li>
+                -->
+                <li class="nav-item">
+                    <a href="#valores" class="nav-link">Valores</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#mision" class="nav-link">Misión</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#vision" class="nav-link">Visión</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#conocenos" class="nav-link">Conócenos</a>
+                    <a href="#perfiles" class="nav-link">Perfiles</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">Contacto</a>
@@ -47,9 +49,21 @@
             <div class="col-lg-6">
                 <div class="header-title">
                     <!--<p class="highlight font-weight-bold size-16 text-uppercase header-small-title title mb-3 ml-1">Bootstrap Theme</p>-->
-                    <h1 class="font-weight-bold main-title mb-4">Únete a nosotros</h1>
-                    <p class="text-sub ml-2 mb-4 pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                    <a href="{{ url_for('registro') }}" class="btn btn-primary ml-2">Registrate gratis<span class="ml-2 right-icon"><i class="fas fa-arrow-right"></i></span></a>
+                    <h1 class="font-weight-bold main-title mb-4">¿Quiénes somos?</h1>
+                    <p class="text-sub ml-2 mb-4 pb-2">
+                            Somos una empresa MEXICANA que nace de la necesidad de garantizar 
+                            a nuestros clientes un servicio diferenciado de calidad, 
+                            nos dedicamos a brindar soluciones para el  campo de tus investigaciones de mercado a través de nuestros sistemas de selección, 
+                            entrenamiento y supervisión de nuestros colaboradores, acompañando en cada paso nuestros procesos para garantizar la información de 
+                            nuestros clientes, además de poder generar fuentes de empleo en nuestro país.
+                    </p>
+                    <br>
+                    <p class="text-sub ml-2 mb-4 pb-2">
+                        Nuestro objetivo es diferenciarnos de los competidores de manera ética a través de nuestro inigualable servicio y capacitación a nuestro equipo.
+                    </p>
+                    <!--
+                        <a href="{{ url_for('registro') }}" class="btn btn-primary ml-2">Registrate gratis<span class="ml-2 right-icon"><i class="fas fa-arrow-right"></i></span></a>
+                    -->
                 </div>
             </div>
             <div class="col-lg-5 offset-lg-1">
@@ -65,6 +79,7 @@
 
 
 <!-- About Start -->
+<!--
 <section class="section bg-grey" id="mision">
     <div class="container">
         <div class="row justify-content-center">
@@ -85,26 +100,25 @@
                     <h3 class="title font-weight-medium mb-4">A perfect bootstrap theme for all types of business.</h3>
                     <p class="mb-4 size-15">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi.</p>
                     <p class="mb-4 size-15">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                    <!--<a href="" class="learn-more size-15">Registrate gratis<span class="ml-2 right-icon"><i class="fas fa-arrow-right"></i></span></a>
--->
+                    <a href="" class="learn-more size-15">Registrate gratis<span class="ml-2 right-icon"><i class="fas fa-arrow-right"></i></span></a>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</section>-->
 <!-- About End -->
 
 
 
 <!-- Services Start -->
-<section class="section" id="vision">
+<section class="section" id="valores">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
                 <div class="text-center mb-5">
                     <div class="text-center mb-5">
-                    <h2 class="highlight header-colorize text-uppercase mb-3">Visión</h2>
-                    <p class="text-sub size-14">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h2 class="highlight header-colorize text-uppercase mb-3">Valores</h2>
+                    <p class="text-sub size-14">En VISOR aseguramos en su totalidad que la privacidad individual es respetada conforme a la legislación de protección de datos  de este modo perseveramos la confidencialidad y el anonimato.</p>
                 </div>
                 </div>
             </div>
@@ -115,8 +129,8 @@
                     <div class="services-icon mt-3">
                         <i class="far fa-window-maximize"></i>
                     </div>
-                    <h4 class="mb-4 mt-4 services-title">Web Design</h4>
-                    <p class="text-sub size-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <h4 class="mb-4 mt-4 services-title">Pasión por el Servicio</h4>
+                    <p class="text-sub size-15">Nos esforzamos por superar las expectativas de nuestros clientes, el acompañamiento en todo momento a lo largo de nuestros procesos nos permite asegurar la calidad de nuestro servicio, clave de nuestro éxito. </p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -124,8 +138,8 @@
                     <div class="services-icon mt-3">
                         <i class="far fa-window-restore"></i>
                     </div>
-                    <h4 class="mb-4 mt-4 services-title">App Development</h4>
-                    <p class="text-sub size-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <h4 class="mb-4 mt-4 services-title">Innovación</h4>
+                    <p class="text-sub size-15">Buscamos soluciones creativas y mejoramos nuestros sistemas para garantizar la satisfacción de nuestros clientes</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -133,8 +147,8 @@
                     <div class="services-icon mt-3">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
-                    <h4 class="mb-4 mt-4 services-title">Mobile Development</h4>
-                    <p class="text-sub size-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <h4 class="mb-4 mt-4 services-title">Entrenamiento Continuo</h4>
+                    <p class="text-sub size-15">Estamos seguros que la capacitación continua de nuestros colaboradores es clave para garantizar la calidad de nuestros servicios. Estamos comprometidas con el desarrollo de nuestro propio sistema e-learning para asegurar en cada proyecto el entendimiento entre nuestros clientes y su mercado. </p>
                 </div>
             </div>
 
@@ -194,13 +208,12 @@
 
 
 <!-- Testimonials Start -->
-<section class="section bg-grey" id="conocenos">
+<section class="section bg-grey" id="perfiles">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 col-md-8">
                 <div class="text-center mb-5">
-                    <h2 class="highlight text-uppercase mb-3 header-colorize">Conócenos</h2>
-                    <p class="text-sub size-14">En KLEO, nos preocupamos porque el cliente siempre quede satisfecho con nuestro trabajo.</p>
+                    <h2 class="highlight text-uppercase mb-3 header-colorize">Perfiles</h2>
                 </div>
             </div>
         </div>

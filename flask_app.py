@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 
 from functions import allowed_file, get_random_string
 
-UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads/'
-#UPLOAD_FOLDER='static/uploads'
+#UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads/'
+UPLOAD_FOLDER='static/uploads'
 ALLOWED_EXTENSIONS = set(['pdf'])
 
 app = Flask(__name__)
@@ -77,7 +77,7 @@ def registro():
 	msg = Message('Detalle de ingreso a la palataforma de ViSor', sender=("Registro existoso ViSor", "trabajoterminal2019a085@gmail.com"), recipients = [correo])
 	msg.html = render_template('correo.html', value = name, psw = password)
 	mail.send(msg)
-	return "Sent"
+	return render_template('signupSuccess.html')
 
 @app.route('/changePassword')
 def changePassword():
