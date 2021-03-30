@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 
 class Comment(db.Model):
 
-    __tablename__ = "comments"
+    __tablename__ = "comments2"
 
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
