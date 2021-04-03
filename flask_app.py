@@ -40,6 +40,20 @@ def login():
 	else:
 		return render_template('login.html')
 
+@app.route('/opinion', methods=['GET', 'POST'])
+def opinion():
+	if request.method == 'POST':
+		nombre = request.form['nombre']
+		correo = request.form['correo']
+		telefono = request.form['telefono']
+		ciudad = request.form['ciudad']
+		gusto = request.form['gusto']
+		msg = Message('Un usuario dejó sus datos en el portal para ser contactado', sender=("Nuevo contacto para ViSor", "trabajoterminal2019a085@gmail.com"), recipients = ["trabajoterminal2019a085@gmail.com"])
+		msg.html = render_template('emailContact.html', nombre = nombre, correo = correo, telefono = telefono, ciudad = ciudad, gusto = gusto)
+		mail.send(msg)
+		return nombre + correo
+	else:
+		return render_template('opinion.html')
 
 @app.route('/registro', methods=['GET', 'POST'] )
 def registro():
@@ -78,6 +92,8 @@ def registro():
 	msg.html = render_template('correo.html', value = name, psw = password)
 	mail.send(msg)
 	return render_template('signupSuccess.html')
+
+
 
 @app.route('/changePassword')
 def changePassword():
