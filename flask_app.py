@@ -48,6 +48,14 @@ db = SQLAlchemy(app)
 def index():
 	return render_template('index.html')
 
+
+@app.route('/user/{id}')
+def user():
+	#obtener el usuario de acuerdo al parametro de ID
+
+	return render_template('userInfo.html', user = user)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
@@ -128,38 +136,8 @@ def changePassword():
 	name = 'Cristian'
 	return render_template('changePassword.html', nombre = name)
 
-
-@app.route('/ingresar', methods=['POST'])
-def upload_image():
-	if 'file' not in request.files:
-		flash('No file part')
-		return redirect(request.url)
-	file = request.files['file']
-	if file.filename == '':
-		flash('No image selected for uploading')
-		return redirect(request.url)
-	if file:
-		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_image filename: ' + filename)
-		flash('Image successfully uploaded and displayed below')
-		return render_template('upload.html', filename=filename)
-	else:
-		flash('Allowed image types are -> png, jpg, jpeg, gif')
-		return redirect(request.url)
-
-
-@app.route('/display/<filename>')
-def display_image(filename):
-	#print('display_image filename: ' + filename)
-	return redirect(url_for('static', filename='uploads/' + filename), code=301)
-
-
 if __name__ == '__main__':
     app.run()
-
-
-
 
 
 class Usuario(db.Model):

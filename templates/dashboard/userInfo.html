@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+
+ .formsignup{
+    background: linear-gradient(0deg, rgba(108,85,163,1) 0%, rgba(177,165,206,1) 37%, rgba(255,255,255,1) 100%);/* #f8f9fa;-webkit-linear-gradient(bottom, #6c55a3,#f0f0f0);*/
+}
+
+.frame2{
+    background-color: white;
+    padding: 1cm;
+
+}
+
+hr.new5 {
+  border: 3px solid  rgba(108,85,163,1);
+  border-radius: 5px;
+  width: 100%;
+}
+
+
+.row.form{
+    background-color: white
+}
+
+.encabezados{
+  color: #6C55A3;
+
+}
+
+
+</style>
+
+<div class="formsignup container-fluid mx-auto pt-3 pl-5 pr-5 ">
+        <div class="frame2 border bg-light rounded">
+                <div class="row justify-content-center">
+                    <div class="col-md-auto">
+                        <a href="{{url_for('index')}}">
+                            <img src="{{url_for('static', filename='images/kleo-logo.png')}}" height="50" class="img-fluid" width="300">
+                        </a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <h3 class="register-heading">Registro</h3>
+                </div>
+                <div class="row">
+                    <hr class="new5">
+                </div>
+                <div class="row">
+                  <h5 class="encabezados">Datos personales</h5>
+                  <hr class="style14">
+                  <br>
+                </div>
+                <form method="POST" enctype="multipart/form-data">
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="name">Nombre(s):</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{ request.form['name']}}" readonly>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="paterno">Apellido Paterno:</label>
+                            <input type="text" class="form-control" name="paterno" placeholder="Apellido paterno" value="{{ request.form['paterno']}}" readonly>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="materno">Apellido Materno:</label>
+                            <input type="text" class="form-control" name="materno"  placeholder="Apellido materno" value="{{ request.form['materno']}}" readonly>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class= "form-group col-md-3">
+                              <label for="fecha">Fecha de nacimiento:</label>
+                              <input type="text" class="form-control" name="fecha" value="{{ request.form['fecha']}}" readonly >
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="edoCivil">Estado civíl:</label>
+                            <input type="text" class="form-control" name="edoCivil" value="{{ request.form['fecha']}}" readonly>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="ciudad">Ciudad de residencia:</label>
+                            <input type="text" class="form-control" name="ciudad" value="{{ request.form['fecha']}}" readonly>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <h5 class="encabezados">Datos de contacto</h5>
+                          <hr class="style14">
+                          <br>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-4">
+                            <label for="correo">Correo electrónico</label>
+                            <input type="email" class="form-control" name="correo" placeholder="alguien@ejemplo.com.mx" value="{{ request.form['correo'] }}" readonly>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="fijo">Télefono fijo</label>
+                            <input type="tel" class="form-control" name="fijo" placeholder="5555555555" maxlength="10" value="{{ request.form['fijo'] }}"  readonly>
+                          </div>
+                          <div class="form-group col-md-4">
+                              <label for="celular">Télefono celular</label>
+                              <input type="tel" class="form-control" name="celular" placeholder="5555555555" maxlength="10" value="{{ request.form['celular'] }}" readonly>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <h5 class="encabezados">Información adicional</h5>
+                          <hr class="style14">
+                          <br>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="conocimiento">Medio de contacto:</label>
+                            <input type="text" class="form-control" name="conocimiento" value="{{ request.form['fecha']}}" readonly>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="perfil">Experiencia previa:</label>
+                            <input type="text" class="form-control" name="perfil" value="{{ request.form['fecha']}}" readonly>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="lugarExperiencia">¿En dónde realizaste esa experiencia previa? (Opcional)</label>
+                                <input type="text" class="form-control" name="lugarExperiencia" placeholder="Anota el lugar donde realizaste tu trabajo" value="{{ request.form['lugarExperiencia'] }}" readonly>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrarme</button>
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="submit" class="btn btn-primary">Visualizar CV</button>
+                      </form>
+        </div>
+</div>
+
+
+{% endblock %}
