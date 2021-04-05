@@ -48,14 +48,6 @@ db = SQLAlchemy(app)
 def index():
 	return render_template('index.html')
 
-
-@app.route('/user/{id}')
-def user():
-	#obtener el usuario de acuerdo al parametro de ID
-
-	return render_template('userInfo.html', user = user)
-
-
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
@@ -125,11 +117,23 @@ def registro():
 	db.session.commit()
 	return render_template('signupSuccess.html')
 
+
 @app.route('/usuarios')
 def getUsers():
     users = Usuario.query.all()
     return render_template('dashboard/users.html', users = users)
 
+
+@app.route('/user/<id>')
+def user(id):
+    #obtener el usuario de acuerdo al parametro de ID
+    user = Usuario.query.get(id)
+    if user is None:
+        users = Usuario.query.all()
+        flash("La información del usuario no se encuentra disponible o no existe")
+        return render_template('dashboard/users.html', users = users)
+    else:
+        return render_template('dashboard/userInfo.html', usuario = user)
 
 @app.route('/changePassword')
 def changePassword():

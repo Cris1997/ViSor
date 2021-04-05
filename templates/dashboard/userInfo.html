@@ -43,7 +43,7 @@ hr.new5 {
                 </div>
                 <br>
                 <div class="row">
-                    <h3 class="register-heading">Registro</h3>
+                    <h3 class="register-heading">Detalle del usuario</h3>
                 </div>
                 <div class="row">
                     <hr class="new5">
@@ -55,33 +55,25 @@ hr.new5 {
                 </div>
                 <form method="POST" enctype="multipart/form-data">
                         <div class="form-row">
-                          <div class="form-group col-md-4">
-                            <label for="name">Nombre(s):</label>
-                            <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{ request.form['name']}}" readonly>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="paterno">Apellido Paterno:</label>
-                            <input type="text" class="form-control" name="paterno" placeholder="Apellido paterno" value="{{ request.form['paterno']}}" readonly>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="materno">Apellido Materno:</label>
-                            <input type="text" class="form-control" name="materno"  placeholder="Apellido materno" value="{{ request.form['materno']}}" readonly>
+                          <div class="form-group col-md-6">
+                            <label for="name">Nombre:</label>
+                            <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{ usuario.name }}" readonly>
                           </div>
                         </div>
                         <div class="form-row">
                           <div class= "form-group col-md-3">
                               <label for="fecha">Fecha de nacimiento:</label>
-                              <input type="text" class="form-control" name="fecha" value="{{ request.form['fecha']}}" readonly >
+                              <input type="text" class="form-control" name="fecha" value="{{ usuario.fechaNacimiento }}" readonly >
                           </div>
                           <div class="form-group col-md-3">
                             <label for="edoCivil">Estado civíl:</label>
-                            <input type="text" class="form-control" name="edoCivil" value="{{ request.form['fecha']}}" readonly>
+                            <input type="text" class="form-control" name="edoCivil" value="{{ usuario.edoCivil }}" readonly>
                           </div>
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="ciudad">Ciudad de residencia:</label>
-                            <input type="text" class="form-control" name="ciudad" value="{{ request.form['fecha']}}" readonly>
+                            <input type="text" class="form-control" name="ciudad" value="{{ usuario.ciudad }}" readonly>
                           </div>
                         </div>
                         <div class="row">
@@ -92,15 +84,15 @@ hr.new5 {
                         <div class="form-row">
                           <div class="form-group col-md-4">
                             <label for="correo">Correo electrónico</label>
-                            <input type="email" class="form-control" name="correo" placeholder="alguien@ejemplo.com.mx" value="{{ request.form['correo'] }}" readonly>
+                            <input type="email" class="form-control" name="correo" placeholder="alguien@ejemplo.com.mx" value="{{ usuario.email }}" readonly>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="fijo">Télefono fijo</label>
-                            <input type="tel" class="form-control" name="fijo" placeholder="5555555555" maxlength="10" value="{{ request.form['fijo'] }}"  readonly>
+                            <input type="tel" class="form-control" name="fijo" placeholder="5555555555" maxlength="10" value="{{ usuario.telFijo }}"  readonly>
                           </div>
                           <div class="form-group col-md-4">
                               <label for="celular">Télefono celular</label>
-                              <input type="tel" class="form-control" name="celular" placeholder="5555555555" maxlength="10" value="{{ request.form['celular'] }}" readonly>
+                              <input type="tel" class="form-control" name="celular" placeholder="5555555555" maxlength="10" value="{{ usuario.telCelular }}" readonly>
                           </div>
                         </div>
                         <div class="row">
@@ -111,20 +103,20 @@ hr.new5 {
                         <div class="form-row">
                             <div class="form-group col-md-6">
                             <label for="conocimiento">Medio de contacto:</label>
-                            <input type="text" class="form-control" name="conocimiento" value="{{ request.form['fecha']}}" readonly>
+                            <input type="text" class="form-control" name="conocimiento" value="" readonly>
                           </div>
                           <div class="form-group col-md-6">
                             <label for="perfil">Experiencia previa:</label>
-                            <input type="text" class="form-control" name="perfil" value="{{ request.form['fecha']}}" readonly>
+                            <input type="text" class="form-control" name="perfil" value="" readonly>
                           </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="lugarExperiencia">¿En dónde realizaste esa experiencia previa? (Opcional)</label>
-                                <input type="text" class="form-control" name="lugarExperiencia" placeholder="Anota el lugar donde realizaste tu trabajo" value="{{ request.form['lugarExperiencia'] }}" readonly>
+                                <input type="text" class="form-control" name="lugarExperiencia"  value="{{ usuario.expPrevia }}" readonly>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Registrarme</button>
+                        <button type="submit" class="btn btn-primary">Enviar contraseña temporal</button>
                         <button type="submit" class="btn btn-primary">Eliminar</button>
                         <button type="submit" class="btn btn-primary">Visualizar CV</button>
                       </form>

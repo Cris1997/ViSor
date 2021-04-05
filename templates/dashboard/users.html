@@ -1,21 +1,7 @@
 
 {% extends 'base.html' %}
 {% block content %}
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-    {% for message in messages %}
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <span>{{ message }}</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %}
-{% endif %}
-{% endwith %}
 <div class="container">
-<div class="row">
-<div class="col-12">
 <table class="table table-bordered table-striped table-hover">
     <thead>
             <th>Nombre</th>
@@ -26,46 +12,24 @@
             <th>Acciones</th>
     </thead>
     <tbody>
+        {% for user in users %}
         <tr>
-            <td>Cristian Rosales Deloya</td>
-            <td>cristiandeloya@gmail.com</td>
-            <td>5578101989</td>
-            <td>5553067676</td>
-            <td>Mystery Shopper</td>
+            <td>{{ user.name }}</td>
+
+            <td>{{ user.email }}</td>
+            <td>{{ user.telFijo }}</td>
+            <td>{{ user.telCelular }}</td>
+            <td>{{ user.perfil }}</td>
             <td>
-                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                {% set url = 'https://www.pythonanywhere.com/user/CristianDeloya/files'+ user.nameCV + 'pdf' %}
+                {% set id = user.id %}
+                <a class="btn btn-primary" href="{{ url }}" role="button" target="_blank"><i class="far fa-eye"></i></a>
+                <a class="btn btn-success" href="{{ url_for('user', id = id ) }}" role="button"><i class="fas fa-edit"></i></a>
             </td>
         </tr>
-        
-        <tr>
-                <td>Cristian Rosales Deloya</td>
-                <td>cristiandeloya@gmail.com</td>
-                <td>5578101989</td>
-                <td>5553067676</td>
-                <td>Mystery Shopper</td>
-                <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                </td>
-        </tr>
-
-        <tr>
-                <td>Cristian Rosales Deloya</td>
-                <td>cristiandeloya@gmail.com</td>
-                <td>5578101989</td>
-                <td>5553067676</td>
-                <td>Mystery Shopper</td>
-                <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                </td>
-            </tr>
-
+        {% endfor %}
     </tbody>
 </table>
-</div>
-</div>
 </div>
 
 {% endblock %}
