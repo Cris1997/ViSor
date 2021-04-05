@@ -1,43 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bienvenido a ViSor</title>
-</head>
-<body>
-    <p style="text-align:center;"><img src="https://www.pythonanywhere.com/user/CristianDeloya/files/home/CristianDeloya/mysite/static/images/kleo-logo.pnghttps://www.pythonanywhere.com/user/CristianDeloya/files/home/CristianDeloya/mysite/static/images/kleo-logo.png" height="70" ></p>
-    <div class="container">
-    <h1>Flask-SQLAlchemy Tutorial</h1>
-    {% for user in users %}
-    <ul id="user.username">
-      <li>
-        <span class="field-name">User:</span>
-        <span class="field-value">{{ user.name }}</span>
-      </li>
-      <li>
-        <span class="field-name">Email:</span>
-        <span class="field-value">{{ user.fechaNacimiento }}</span>
-      </li>
-      <li>
-        <span class="field-name">Created:</span>
-        <span class="field-value">{{ user.email }}</span>
-      </li>
-      <li>
-        <span class="field-name">Bio:</span>
-        <span class="field-value">{{ user.telFijo }}</span>
-      </li>
-      <li>
-        <span class="field-name">Admin:</span>
-        <span class="field-value">{{ user.telCelular }}</span>
-      </li>
-      <li>
-         <a href = "www.google.com.mx" target="_blank">Ver CV</a>
-      </li>
-    </ul>
-    {% endfor %}
-  </div>
 
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+<div class="container">
+<div class="row">
+<div class="col-12">
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+            <th>Nombre</th>
+            <th>Correo electrónico</th>
+            <th>Teléfono Celular</th>
+            <th>Teléfono Fijo</th>
+            <th>Experiencia</th>
+            <th>Acciones</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Cristian Rosales Deloya</td>
+            <td>cristiandeloya@gmail.com</td>
+            <td>5578101989</td>
+            <td>5553067676</td>
+            <td>Mystery Shopper</td>
+            <td>
+                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+            </td>
+        </tr>
+        
+        <tr>
+                <td>Cristian Rosales Deloya</td>
+                <td>cristiandeloya@gmail.com</td>
+                <td>5578101989</td>
+                <td>5553067676</td>
+                <td>Mystery Shopper</td>
+                <td>
+                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                </td>
+        </tr>
+
+        <tr>
+                <td>Cristian Rosales Deloya</td>
+                <td>cristiandeloya@gmail.com</td>
+                <td>5578101989</td>
+                <td>5553067676</td>
+                <td>Mystery Shopper</td>
+                <td>
+                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                </td>
+            </tr>
+
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
+{% endblock %}
