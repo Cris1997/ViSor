@@ -15,21 +15,22 @@
         {% for user in users %}
         <tr>
             <td>{{ user.name }}</td>
-
             <td>{{ user.email }}</td>
             <td>{{ user.telFijo }}</td>
             <td>{{ user.telCelular }}</td>
             <td>{{ user.perfil }}</td>
             <td>
-                {% set url = 'https://www.pythonanywhere.com/user/CristianDeloya/files'+ user.nameCV + 'pdf' %}
                 {% set id = user.id %}
-                <a class="btn btn-primary" href="{{ url }}" role="button" target="_blank"><i class="far fa-eye"></i></a>
+                 {%  set cv = user.nameCV %}
+
+                <a class="btn btn-primary" href="{{ url_for('download_file', filename = cv ) }}" role="button" target="_blank"><i class="fas fa-download"></i></a>
                 <a class="btn btn-success" href="{{ url_for('user', id = id ) }}" role="button"><i class="fas fa-edit"></i></a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+<a class="btn btn-success" href="{{ url_for('exportar')}}" role="button">Exportar datos</a>
 </div>
 
 {% endblock %}

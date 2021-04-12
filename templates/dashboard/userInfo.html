@@ -53,7 +53,7 @@ hr.new5 {
                   <hr class="style14">
                   <br>
                 </div>
-                <form method="POST" enctype="multipart/form-data">
+                <form method="POST">
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="name">Nombre:</label>
@@ -102,12 +102,18 @@ hr.new5 {
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                            <label for="conocimiento">Medio de contacto:</label>
-                            <input type="text" class="form-control" name="conocimiento" value="" readonly>
+                            <label for="conocimiento">Enterado por:</label>
+                            <input type="text" class="form-control" name="conocimiento" value="{{ usuario.medioEnterado}}" readonly>
                           </div>
                           <div class="form-group col-md-6">
                             <label for="perfil">Experiencia previa:</label>
-                            <input type="text" class="form-control" name="perfil" value="" readonly>
+                            <input type="text" class="form-control" name="perfil" value="{{ usuario.perfil}}" readonly>
+                          </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                            <label for="perfil">Intereses:</label>
+                            <input type="text" class="form-control" name="perfil" value="{{ usuario.interes}}" readonly>
                           </div>
                         </div>
                         <div class="form-row">
@@ -116,9 +122,11 @@ hr.new5 {
                                 <input type="text" class="form-control" name="lugarExperiencia"  value="{{ usuario.expPrevia }}" readonly>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Enviar contraseña temporal</button>
-                        <button type="submit" class="btn btn-primary">Eliminar</button>
-                        <button type="submit" class="btn btn-primary">Visualizar CV</button>
+                        {% set filename = usuario.nameCV %}
+                        {% set id = usuario.id %}
+                        <a class="btn btn-primary" href="{{ url_for('download_file',filename = filename ) }}" role="button">Descargar CV</a>
+                        <a class="btn btn-success" href="{{ url_for('sendPassword',id = id ) }}" role="button">Enviar contraseña temporal</a>
+                        <a class="btn btn-success" href="{{ url_for('delete', id = id) }}" role="button">Eliminar</a>
                       </form>
         </div>
 </div>
