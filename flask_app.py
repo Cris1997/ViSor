@@ -15,8 +15,7 @@ FOLDER_CV='/home/CristianDeloya/mysite/static/uploads/cv'
 ALLOWED_EXTENSIONS = set(['pdf'])
 
 app = Flask(__name__)
-mail = Mail(app)
-excel.init_excel(app)
+
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -24,7 +23,6 @@ app.config['MAIL_USERNAME'] = 'visorcompany2021@gmail.com'
 app.config['MAIL_PASSWORD'] = 'domokunsupermami97'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-mail = Mail(app)
 
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -35,6 +33,8 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 #Configure database
 
 app.config["DEBUG"] = True
+mail = Mail(app)
+excel.init_excel(app)
 
 #DATABASE CONFIGURATION
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
@@ -43,23 +43,14 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostnam
     hostname="CristianDeloya.mysql.pythonanywhere-services.com",
     databasename="CristianDeloya$visor",
 )
+
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# blueprint for auth routes in our app
-from auth import auth as auth_blueprint
-app.register_blueprint(auth_blueprint)
-
-# blueprint for non-auth parts of app
-from main import main as main_blueprint
-app.register_blueprint(main_blueprint)
-
 db = SQLAlchemy(app)
 
-
-
-@app.route('/', methods=['GET','POST'])
+@app.route('/')
 def index():
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -74,25 +65,6 @@ def index():
     else:
 	    return render_template('index.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-	if request.method == 'POST':
-		email = request.form['email']
-		password = request.form['password']
-
-		user = Usuario.query.filter_by(email=email).first()
-
-        # check if the user actually exists
-        # take the user-supplied password, hash it, and compare it to the hashed password in the database
-        #if not user or not check_password_hash(user.password, password):
-         #   flash('Por favor, verifica que tu usuario y/o contraseña son correctos.')
-          #  return redirect(url_for('login')) # if the user doesn't exist or password is wrong, reload the page
-
-        # if the above check passes, then we know the user has the right credentials
-        #return chec
-
-	else:
-		return render_template('login.html')
 
 @app.route('/opinion', methods=['GET', 'POST'])
 def opinion():
@@ -108,67 +80,6 @@ def opinion():
 		return nombre + correo
 	else:
 		return render_template('opinion.html')
-
-@app.route('/registro', methods=['GET', 'POST'] )
-def registro():
-	if request.method == 'POST':
-		name = request.form['name']
-		paterno = request.form['paterno']
-		materno = request.form['materno']
-		fecha = request.form['fecha']
-		edoCivil = request.form['edoCivil']
-		ciudad = request.form['ciudad']
-		email = request.form['correo']
-		fijo = request.form['fijo']
-		celular = request.form['celular']
-		medioEnterado = request.form['medioEnterado']
-		perfil = request.form['perfil']
-		interes = request.form['interes']
-		lugarExperiencia = request.form['lugarExperiencia']
-		perfil = request.form['perfil']
-		file = request.files['cv']
-
-		user = Usuario.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
-
-		if not verificaEdad(fecha):
-		    flash('Debes ser mayor de 18 años para poder registrarte en la plataforma.')
-		    return redirect(url_for('registro'))
-
-		if user:
-		    flash('La dirección de correo electrónicco que ingresaste ya existe.')
-		    return redirect(url_for('registro'))
-
-
-
-	else:
-		return render_template('registro.html')
-
-	if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
-		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER']+"/cv",filename))
-		extension = filename.split(".")
-		extension = str(extension[1])
-		source = UPLOAD_FOLDER+"/cv/"+filename
-		nameCV = name+paterno+materno+"."+extension
-		destination  = UPLOAD_FOLDER+"/cv/"+nameCV
-		os.rename(source,destination)
-	else:
-		flash('El archivo que subiste debe estar en formato pdf')
-		return redirect(url_for('registro'))
-
-	#get random password
-	randomPassword = get_random_string()
-
-	#Build mail body and recipients
-	msg = Message('Detalle de ingreso a la plataforma de ViSor', sender=("Registro existoso ViSor", "visorcompany2021@gmail.com"), recipients = [email])
-	msg.html = render_template('correo.html', value = name)
-	mail.send(msg)
-	#Save user into database
-	fullname = name + ' ' + paterno + ' ' + materno
-	user = Usuario(name = fullname, fechaNacimiento = fecha, edoCivil = edoCivil, ciudad = ciudad, email = email, telFijo = fijo, telCelular = celular, nameCV = nameCV, password = randomPassword, tempPassword = 1, medioEnterado = medioEnterado, perfil = perfil, interes = interes, expPrevia = lugarExperiencia)
-	db.session.add(user)
-	db.session.commit()
-	return render_template('signupSuccess.html')
 
 
 @app.route('/usuarios')
@@ -226,10 +137,73 @@ def delete(id):
 	flash('Eliminaste un usuario con éxito')
 	return redirect(url_for('getUsers'))
 
+@app.route('/login',methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
 
+@app.route('/registro', methods=['GET','POST'])
+def registro():
+    if request.method == 'POST':
+        name = request.form['name']
+        paterno = request.form['paterno']
+        materno = request.form['materno']
+        fecha = request.form['fecha']
+        edoCivil = request.form['edoCivil']
+        ciudad = request.form['ciudad']
+        email = request.form['correo']
+        fijo = request.form['fijo']
+        celular = request.form['celular']
+        medioEnterado = request.form['medioEnterado']
+        perfil = request.form['perfil']
+        interes = request.form['interes']
+        lugarExperiencia = request.form['lugarExperiencia']
+        perfil = request.form['perfil']
+        file = request.files['cv']
+
+        user = Usuario.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
+
+        if not verificaEdad(fecha):
+            flash('Debes ser mayor de 18 años para poder registrarte en la plataforma.')
+            return redirect(url_for('registro'))
+
+        if user:
+            flash('La dirección de correo electrónico que ingresaste ya existe.')
+            return redirect(url_for('registro'))
+    else:
+	    return render_template('registro.html')
+
+    if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
+	    filename = secure_filename(file.filename)
+	    file.save(os.path.join(app.config['UPLOAD_FOLDER']+"/cv",filename))
+	    extension = filename.split(".")
+	    extension = str(extension[1])
+	    source = UPLOAD_FOLDER+"/cv/"+filename
+	    nameCV = name+paterno+materno+"."+extension
+	    destination  = UPLOAD_FOLDER+"/cv/"+nameCV
+	    os.rename(source,destination)
+    else:
+	    flash('El archivo que subiste debe estar en formato pdf')
+	    return redirect(url_for('registro'))
+
+    #get random password
+    randomPassword = get_random_string()
+
+    #Build mail body and recipients
+    msg = Message('Detalle de ingreso a la plataforma de ViSor', sender=("Registro existoso ViSor", "visorcompany2021@gmail.com"), recipients = [email])
+    msg.html = render_template('correo.html', value = name)
+    mail.send(msg)
+    #Save user into database
+    fullname = name + ' ' + paterno + ' ' + materno
+    user = Usuario(name = fullname, fechaNacimiento = fecha, edoCivil = edoCivil, ciudad = ciudad, email = email, telFijo = fijo, telCelular = celular, nameCV = nameCV, password = randomPassword, tempPassword = 1, medioEnterado = medioEnterado, perfil = perfil, interes = interes, expPrevia = lugarExperiencia)
+    db.session.add(user)
+    db.session.commit()
+    return render_template('signupSuccess.html')
 
 if __name__ == '__main__':
     app.run()
+
+
+
 
 
 class Usuario(db.Model):
@@ -270,7 +244,6 @@ class Usuario(db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
-
 
 
 
