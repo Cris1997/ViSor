@@ -2,6 +2,7 @@
 import os
 import urllib.request
 import flask_excel as excel
+
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from flask_mail import Mail, Message
 from werkzeug.utils import secure_filename
@@ -9,13 +10,19 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
 from functions import allowed_file, get_random_string, verificaEdad
 
+#LOGIN
+from flask_login import UserMixin
+from flask_login import LoginManager
+from flask_login import login_user, logout_user, login_required
+
 UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads'
 FOLDER_CV='/home/CristianDeloya/mysite/static/uploads/cv'
 #UPLOAD_FOLDER='static/uploads'
 ALLOWED_EXTENSIONS = set(['pdf'])
 
 app = Flask(__name__)
-
+login_manager = LoginManager(app)
+login_manager.login_view = "login2"
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -24,7 +31,7 @@ app.config['MAIL_PASSWORD'] = 'domokunsupermami97'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
-app.secret_key = "secret key"
+app.secret_key = "7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['FOLDER_CV'] = FOLDER_CV
 app.config['ALLOWED_EXTENSIONS']= ALLOWED_EXTENSIONS
@@ -50,7 +57,44 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+
+@login_manager.user_loader
+def load_user(user_id):
+    # since the user_id is just the primary key of our user table, use it in the query for the user
+    return Administrador.query.get(int(user_id))
+
+
+@app.route('/login2', methods = ['GET', 'POST'])
+def login2():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = Administrador.query.filter_by(email=email).first()
+        if user is not None and user.check_password(password):
+            login_user(user)
+            return 'Ya estas logueado'
+        else:
+            return render_template('loginP.html')
+    else:
+        return render_template('loginP.html')
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return 'Cerraste sesión con éxito'
+
+@app.route('/createAdmin')
+def createAdmin():
+    user = Administrador(name = "Cristian Rosales Deloya", email = "cristiandeloya@gmail.com", password = 'domokunsupermami97')
+    db.session.add(user)
+    db.session.commit()
+    return 'Exito guardando el regiistro'
+
+
+
 @app.route('/')
+@login_required
 def index():
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -204,11 +248,37 @@ if __name__ == '__main__':
 
 
 
+#Models
+class Administrador(UserMixin, db.Model):
+
+    __tablename__ = "administrador"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200))
+    email = db.Column(db.String(100),unique=True)
+    password = db.Column(db.String(100))
 
 
-class Usuario(db.Model):
+    def __init__(self, name, email, password):
+        self.name = name
+        self.email = email
+        self.password = generate_password_hash(password)
 
-    __tablename__ = "usuarios"
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def __repr__(self):
+        return '<Administrador {}>'.format(self.email)
+
+
+
+
+class Usuario(UserMixin,db.Model):
+
+    __tablename__ = "usuario"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200))
