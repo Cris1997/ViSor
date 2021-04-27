@@ -1,0 +1,94 @@
+{% extends './base2.html' %}
+
+{% block content%}
+<style>
+        label{
+            color: #6703b9;
+        }
+        </style>
+<!-- We Create Start -->
+<!-- We Create Start -->
+<div class="we-create-area choose-padding">
+    <div class="container">
+        <div class="row d-flex align-items-start">
+            <div class="col-lg-12 col-md-12">
+                <div class="we-create-cap">
+                    <h4>Dejanos tus datos y nos comunicaremos contigo.</h4>
+                    <br>
+                    <!--Insertat formularip de login-->
+                    <form method="POST">
+                            <div class="form-row">
+                                <div class="form-group col-md-10 col-lg-10">
+                                        <label for="nombre">Nombre completo:</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ request.form['nombre']}}" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-10 col-lg-10">
+                                        <label for="email">Correo electrónico:</label>
+                                        <input type="email" class="form-control" id="email" name="email" value="{{ request.form['email']}}">
+                                </div>
+                            </div>
+                            <div class="form-row ">
+                                <div class="form-group col-md-10 col-lg-10">
+                                        <label for="telefono">Teléfono de contacto:</label>
+                                        <input type="tel" class="form-control" id="telefono" name="telefono" value="{{ request.form['telefono']}}" maxlength="10">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                    <div class="form-group col-md-10 col-lg-10">
+                                            <label for="ciudad">Ciudad donde radicas:</label>
+                                            <select name="ciudad" class="form-select" value="{{ request.form['ciudad']}}" required>
+                                            <option value=""></option>
+                                            <option value="Aguascalientes">Aguascalientes</option>
+                                            <option value="Campeche">Campeche</option>
+                                            <option value="Chetumal">Chetumal</option>
+                                            <option value="Chihuahua">Chihuahua</option>
+                                            <option value="Chilpancingo">Chilpancingo</option>
+                                            <option value="Ciudad de México">Ciudad de México</option>
+                                            <option value="Ciudad Victoria">Ciudad Victoria</option>
+                                            <option value="Chetumal">Chetumal</option>
+                                            <option value="Colima">Colima</option>
+                                            <option value="Cuernavaca">Cuernavaca</option>
+                                            <option value="Culiacán">Culiacán</option>
+                                            <option value="Durango">Durango</option>
+                                            <option value="Guanajuato">Guanajuato</option>
+                                            <option value="Guadalajara">Guadalajara</option>
+                                            <option value="Hermosillo">Hermosillo</option>
+                                            <option value="La Paz">La Paz</option>
+                                            <option value="Mérida">Mérida</option>
+                                            <option value="Mexicali">Mexicali</option>
+                                            <option value="Monterrey">Monterrey</option>
+                                            <option value="Morelia">Morelia</option>
+                                            <option value="Oaxaca">Oaxaca</option>
+                                            <option value="Pachuca">Pachuca</option>
+                                            <option value="Puebla">Puebla</option>
+                                            <option value="Querétaro">Querétaro</option>
+                                            <option value="Saltillo">Saltillo</option>
+                                            <option value="San Luis Potosí">San Luis Potosí</option>
+                                            <option value="Tepic">Tepic</option>
+                                            <option value="Toluca">Toluca</option>
+                                            <option value="Tuxtla Gutiérrez">Tuxtla Gutiérrez</option>
+                                            <option value="Tlaxcala">Tlaxcala</option>
+                                            <option value="Villahermosa">Villahermosa</option>
+                                            <option value="Zacatecas">Zacatecas</option>
+                                            </select>
+                                        </div>
+                            </div>
+                            <div class="form-row">
+                                    <div class="form-group col-md-12 col-lg-12">
+                                    <label for="consulta">Platicanos más sobre tu consulta y como podemos ayudarte.</label>
+                                    <textarea class="form-control" id="consulta" name="consulta" rows="3" value = "{{request.form['consulta']}}" ></textarea>
+                                    </div>
+                            </div>
+                            <button type="submit" class="btn header-btn">Enviar mensaje</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- We Create End -->
+
+
+{% endblock %}

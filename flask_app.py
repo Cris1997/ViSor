@@ -84,7 +84,7 @@ def logout():
     logout_user()
     return 'Cerraste sesión con éxito'
 
-@app.route('/createAdmin')
+#@app.route('/createAdmin')
 def createAdmin():
     user = Administrador(name = "Cristian Rosales Deloya", email = "cristiandeloya@gmail.com", password = 'domokunsupermami97')
     db.session.add(user)
@@ -94,7 +94,6 @@ def createAdmin():
 
 
 @app.route('/')
-@login_required
 def index():
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -107,26 +106,46 @@ def index():
         mail.send(msg)
         return render_template('signupSuccess.html')
     else:
-	    return render_template('index.html')
+	    return render_template('landing_page/index.html')
+
+@app.route('/conocenos')
+def conocenos():
+    return render_template('landing_page/conocenos.html')
+
+@app.route('/perfiles')
+def perfiles():
+    return render_template('landing_page/perfiles.html')
+
+@app.route('/servicios')
+def servicios():
+    return render_template('landing_page/servicios.html')
+
+@app.route('/contacto', methods=['GET', 'POST'])
+def contacto():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        correo = request.form['email']
+        telefono = request.form['telefono']
+        ciudad = request.form['ciudad']
+        consulta = request.form['consulta']
+        msg = Message('Un usuario dejó sus datos en el portal para ser contactado', sender=("Nuevo contacto para ViSor", "visorcompany2021@gmail.com"), recipients = ["visorcompany2021@gmail.com"])
+        msg.html = render_template('emailContact.html', nombre = nombre, correo = correo, telefono = telefono, ciudad = ciudad,  consulta = consulta)
+        mail.send(msg)
+        flash('Tu mensaje fue enviado correctamente, ViSor se pondrá en contacto contigo.')
+        return render_template('landing_page/contacto.html')
+    else:
+        return render_template('landing_page/contacto.html')
+
+@app.route('/ingresar')
+def ingresar():
+    return render_template('landing_page/login.html')
 
 
-@app.route('/opinion', methods=['GET', 'POST'])
-def opinion():
-	if request.method == 'POST':
-		nombre = request.form['nombre']
-		correo = request.form['correo']
-		telefono = request.form['telefono']
-		ciudad = request.form['ciudad']
-		gusto = request.form['gusto']
-		msg = Message('Un usuario dejó sus datos en el portal para ser contactado', sender=("Nuevo contacto para ViSor", "visorcompany2021@gmail.com"), recipients = ["visorcompany2021@gmail.com"])
-		msg.html = render_template('emailContact.html', nombre = nombre, correo = correo, telefono = telefono, ciudad = ciudad, gusto = gusto)
-		mail.send(msg)
-		return nombre + correo
-	else:
-		return render_template('opinion.html')
 
+#Login requires
 
 @app.route('/usuarios')
+@login_required
 def getUsers():
     users = Usuario.query.all()
     return render_template('dashboard/users.html', users = users)
@@ -181,9 +200,6 @@ def delete(id):
 	flash('Eliminaste un usuario con éxito')
 	return redirect(url_for('getUsers'))
 
-@app.route('/login',methods=['GET', 'POST'])
-def login():
-    return render_template('login.html')
 
 @app.route('/registro', methods=['GET','POST'])
 def registro():
