@@ -1,19 +1,15 @@
 {% extends './base2.html' %}
 
 {% block content%}
-<style>
-        label{
-            color: #6703b9;
-        }
-        </style>
+
 <!-- We Create Start -->
 <!-- We Create Start -->
-<div class="we-create-area choose-padding">
-    <div class="container">
+<div class="we-create-area ">
+    <div class="container choose-padding">
         <div class="row d-flex align-items-start">
             <div class="col-lg-12 col-md-12">
                 <div class="we-create-cap">
-                    <h4>Dejanos tus datos y nos comunicaremos contigo.</h4>
+                    <h4>Déjanos tus datos y nos comunicaremos contigo.</h4>
                     <br>
                     <!--Insertat formularip de login-->
                     <form method="POST">
@@ -37,7 +33,7 @@
                             </div>
                             <div class="form-row">
                                     <div class="form-group col-md-10 col-lg-10">
-                                            <label for="ciudad">Ciudad donde radicas:</label>
+                                            <label for="ciudad">Ciudad dónde radicas:</label>
                                             <select name="ciudad" class="form-select" value="{{ request.form['ciudad']}}" required>
                                             <option value=""></option>
                                             <option value="Aguascalientes">Aguascalientes</option>

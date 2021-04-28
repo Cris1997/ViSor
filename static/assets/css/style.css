@@ -2106,36 +2106,36 @@ hr {
 }
 
 .we-padding {
-    padding-top: 100px
+    padding-top: 50px
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
     .we-padding {
-        padding-top: 100px
+        padding-top: 50px
     }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .we-padding {
-        padding-top: 80px
+        padding-top: 40px
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .we-padding {
-        padding-top: 80px
+        padding-top: 40px
     }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     .we-padding {
-        padding-top: 80px
+        padding-top: 40px
     }
 }
 
 @media (max-width: 767px) {
     .we-padding {
-        padding-top: 80px
+        padding-top: 40px
     }
 }
 
@@ -2231,25 +2231,25 @@ hr {
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
     .choose-padding {
-        padding-top: 60px
+        padding-top: 160px
     }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     .choose-padding {
-        padding-top: 30px
+        padding-top: 160px
     }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
     .choose-padding {
-        padding-top: 30px
+        padding-top: 160px
     }
 }
 
 @media (max-width: 767px) {
     .choose-padding {
-        padding-top: 30px
+        padding-top: 160px
     }
 }
 
@@ -3356,7 +3356,7 @@ hr {
 }
 
 .we-create-area .we-create-cap h3 {
-    color: #2b4b80;
+    color: #3e0979;
     font-size: 50px;
     font-weight: 700;
     line-height: 1.3;
