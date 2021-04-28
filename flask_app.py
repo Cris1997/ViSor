@@ -89,24 +89,13 @@ def createAdmin():
     user = Administrador(name = "Cristian Rosales Deloya", email = "cristiandeloya@gmail.com", password = 'domokunsupermami97')
     db.session.add(user)
     db.session.commit()
-    return 'Exito guardando el regiistro'
+    return 'Exito guardando el registro'
 
 
 
 @app.route('/')
 def index():
-    if request.method == 'POST':
-        nombre = request.form['nombre']
-        correo = request.form['correo']
-        telefono = request.form['telefono']
-        ciudad = request.form['ciudad']
-        gusto = request.form['gusto']
-        msg = Message('Un usuario dejó sus datos en el portal para ser contactado', sender=("Nuevo contacto para ViSor", "visorcompany2021@gmail.com"), recipients = ["visorcompany2021@gmail.com"])
-        msg.html = render_template('emailContact.html', nombre = nombre, correo = correo, telefono = telefono, ciudad = ciudad, gusto = gusto)
-        mail.send(msg)
-        return render_template('signupSuccess.html')
-    else:
-	    return render_template('landing_page/index.html')
+    return render_template('landing_page/index.html')
 
 @app.route('/conocenos')
 def conocenos():
@@ -136,10 +125,13 @@ def contacto():
     else:
         return render_template('landing_page/contacto.html')
 
-@app.route('/ingresar')
+@app.route('/ingresar', methods = ['GET', 'POST' ])
 def ingresar():
-    return render_template('landing_page/login.html')
-
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+    else:
+        return render_template('landing_page/login.html')
 
 
 #Login requires
@@ -150,8 +142,9 @@ def getUsers():
     users = Usuario.query.all()
     return render_template('dashboard/users.html', users = users)
 
-
+#Select user
 @app.route('/user/<id>')
+@login_required
 def user(id):
     #obtener el usuario de acuerdo al parametro de ID
     user = Usuario.query.get(id)
@@ -162,10 +155,19 @@ def user(id):
     else:
         return render_template('dashboard/userInfo.html', usuario = user)
 
-
+#Delete user
+@app.route('/deleteUser/<id>')
+@login_required
+def delete(id):
+	user = Usuario.query.get(id)
+	db.session().delete(user)
+	db.session().commit()
+	flash('Eliminaste un usuario con éxito')
+	return redirect(url_for('getUsers'))
 
 #Exportar los datos de la base a un documento Excel
 @app.route("/exportar", methods=['GET'])
+@login_required
 def exportar():
     query_sets = Usuario.query.all()
     column_names = ['id', 'name','fechaNacimiento', 'edoCivil','ciudad', 'email','telFijo','telCelular','medioEnterado', 'perfil', 'interes', 'expPrevia' ]
@@ -174,6 +176,7 @@ def exportar():
 
 #Enviar password temporal para que el usuario tenga acceso a Visor
 @app.route("/sendPassword/<id>")
+@login_required
 def sendPassword(id):
     usuario = Usuario.query.get(id)
     name = usuario.name
@@ -186,19 +189,12 @@ def sendPassword(id):
     flash('Has enviado correo electrónico con contraseña temporal exitosamente')
     return redirect(url_for('getUsers'))
 
-
+#Descargar curriculum
 @app.route('/download/<filename>')
+@login_required
 def download_file(filename):
     return send_from_directory(app.config['FOLDER_CV'],
                                filename, as_attachment=True)
-
-@app.route('/deleteUser/<id>')
-def delete(id):
-	user = Usuario.query.get(id)
-	db.session().delete(user)
-	db.session().commit()
-	flash('Eliminaste un usuario con éxito')
-	return redirect(url_for('getUsers'))
 
 
 @app.route('/registro', methods=['GET','POST'])
@@ -230,7 +226,7 @@ def registro():
             flash('La dirección de correo electrónico que ingresaste ya existe.')
             return redirect(url_for('registro'))
     else:
-	    return render_template('registro.html')
+	    return render_template('forms/registro.html')
 
     if file and allowed_file(file.filename, ALLOWED_EXTENSIONS):
 	    filename = secure_filename(file.filename)
@@ -250,14 +246,32 @@ def registro():
 
     #Build mail body and recipients
     msg = Message('Detalle de ingreso a la plataforma de ViSor', sender=("Registro existoso ViSor", "visorcompany2021@gmail.com"), recipients = [email])
-    msg.html = render_template('correo.html', value = name)
+    msg.html = render_template('emails/correo.html', value = name)
     mail.send(msg)
     #Save user into database
     fullname = name + ' ' + paterno + ' ' + materno
     user = Usuario(name = fullname, fechaNacimiento = fecha, edoCivil = edoCivil, ciudad = ciudad, email = email, telFijo = fijo, telCelular = celular, nameCV = nameCV, password = randomPassword, tempPassword = 1, medioEnterado = medioEnterado, perfil = perfil, interes = interes, expPrevia = lugarExperiencia)
     db.session.add(user)
     db.session.commit()
-    return render_template('signupSuccess.html')
+    return render_template('emails/signupSuccess.html')
+
+@app.route('/registro_opinion', methods = ['GET', 'POST'])
+def registro_opinion():
+    if request.method == 'POST':
+        nombre  = request.form['name']
+        paterno = request.form['paterno']
+        materno = request.form['materno']
+        correo = request.form['correo']
+        gusto = request.form['gusto']
+        fechaNac = request.form['fecha']
+        edoCivil =  request.form['edoCivil']
+        return fechaNac
+    else:
+        return render_template('forms/registroOpinador.html')
+
+@app.route('/admin')
+def admin():
+    return render_template('baseAdmin.html')
 
 if __name__ == '__main__':
     app.run()
@@ -308,8 +322,7 @@ class Usuario(UserMixin,db.Model):
     password = db.Column(db.String(100))
     tempPassword = db.Column(db.Boolean)
     medioEnterado = db.Column(db.String(100))
-    perfil = db.Column(db.String(100))
-    interes = db.Column(db.String(100))
+    perfil = db.Column(db.String(250))
     expPrevia = db.Column(db.String(500))
 
     def __init__(self, name, fechaNacimiento, edoCivil, ciudad, email, telFijo, telCelular, nameCV, password, tempPassword, medioEnterado, perfil,interes,  expPrevia):
