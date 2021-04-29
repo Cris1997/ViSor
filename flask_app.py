@@ -13,7 +13,7 @@ from functions import allowed_file, get_random_string, verificaEdad
 #LOGIN
 from flask_login import UserMixin
 from flask_login import LoginManager
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 UPLOAD_FOLDER='/home/CristianDeloya/mysite/static/uploads'
 FOLDER_CV='/home/CristianDeloya/mysite/static/uploads/cv'
@@ -22,7 +22,7 @@ ALLOWED_EXTENSIONS = set(['pdf'])
 
 app = Flask(__name__)
 login_manager = LoginManager(app)
-login_manager.login_view = "login2"
+login_manager.login_view = "ingresar"
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -58,45 +58,29 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 
+
+
 @login_manager.user_loader
 def load_user(user_id):
     # since the user_id is just the primary key of our user table, use it in the query for the user
     return Administrador.query.get(int(user_id))
 
 @app.route('/prueba')
+@login_required
 def prueba():
     return render_template('dashboard/dashboard.html')
 
 @app.route('/tabla')
+@login_required
 def tabla():
     return render_template('dashboard/table.html')
 
 @app.route('/ua')
+@login_required
 def ua():
     return render_template('dashboard/user.html')
 
-@app.route('/login2', methods = ['GET', 'POST'])
-def login2():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        user = Administrador.query.filter_by(email=email).first()
-        if user is not None and user.check_password(password):
-            #Ir a la pantalla de inicio para los administradores
-            login_user(user)
-            return 'Ya estas logueado'
-        else:
-            #Error al iniciar sesióm
-            return render_template('loginP.html')
-    else:
-        #Solamente se invocó al formulario del login
-        return render_template('loginP.html')
 
-
-@app.route('/logout')
-def logout():
-    logout_user()
-    return render_template('landing_page/login.html')
 
 #@app.route('/createAdmin')
 def createAdmin():
@@ -109,7 +93,10 @@ def createAdmin():
 
 @app.route('/')
 def index():
-    return render_template('landing_page/index.html')
+    if current_user.is_authenticated:
+        return render_template('dashboard/dashboard.html', name=current_user.name)
+    else:
+        return render_template('landing_page/index.html')
 
 @app.route('/conocenos')
 def conocenos():
@@ -148,7 +135,7 @@ def ingresar():
         if user is not None and user.check_password(password):
             #Ir a la pantalla de inicio para los administradores
             login_user(user)
-            return render_template('')
+            return render_template('dashboard/dashboard.html')
         else:
             #Error al iniciar sesióm
             return render_template('landing_page/login.html')
@@ -156,6 +143,10 @@ def ingresar():
         #Solamente se invocó al formulario del login
         return render_template('landing_page/login.html')
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return render_template('landing_page/login.html')
 
 #Login requires
 
