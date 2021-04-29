@@ -1,161 +1,123 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>ViSor - Especialista en trabajo de campo</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='assets/img/logo/logo2.jpg')}}">
+<!--
+=========================================================
+ Light Bootstrap Dashboard - v2.0.1
+=========================================================
 
-		<!-- CSS here -->
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/owl.carousel.min.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/flaticon.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/slicknav.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/animate.min.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/magnific-popup.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/fontawesome-all.min.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/themify-icons.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/slick.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/nice-select.css')}}">
-        <link rel="stylesheet" href="{{url_for('static', filename = 'assets/css/style.css')}}">
-   </head>
+ Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard
+ Copyright 2019 Creative Tim (https://www.creative-tim.com)
+ Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard/blob/master/LICENSE)
 
+ Coded by Creative Tim
 
-   <body>
-       <!-- Preloader Start -->
-    <div id="preloader-active">
-            <div class="preloader d-flex align-items-center justify-content-center">
-                <div class="preloader-inner position-relative">
-                    <div class="preloader-circle"></div>
-                    <div class="preloader-img pere-text">
-                        <img src="{{ url_for('static', filename='assets/img/logo/logo2.jpg')}}" alt="">
-                    </div>
-                </div>
-            </div>
-    </div>
-        <!-- Preloader Start -->
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <!-- logo -->
-            <a class="navbar-brand" href="#">
-              <img src="{{ url_for('static', filename = 'assets/img/logo/logo2.jpg' ) }}" width="140" height="70" alt="">
-            </a>
-            
-            <!-- enlaces -->
-            <div class="collapse navbar-collapse" id="opciones">   
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="">Candidatos</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="">Opinadores</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="">Opción 3</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="">Opción 4</a>
-                </li>            
-              </ul>
-            </div>
-          </nav>
-     
+=========================================================
 
-        
-        <footer>
-                <!-- Footer Start-->
-               <div class="footer-main" >
-                 <div class="footer-area footer-padding">
-                     <div class="container">
-                         <div class="row d-flex justify-content-between">
-                             <div class="col-lg-6 col-md-8 col-sm-12">
-                                <div class="single-footer-caption mb-50">
-                                  <div class="single-footer-caption mb-30">
-                                       <!-- logo -->
-                                      <div class="footer-tittle">
-                                          <div class="footer-pera">
-                                              <p><b>Contacto</b></p>
-                                              <p class="info1">info@yourdomain.com</p>
-                                              <p><b>Dirección</b></p>
-                                              <p class="info1">221B Baker Street, P.O Box 353 Park <br> Road, USA - 215431</p>
-                                              <p><b>Teléfonos</b></p>
-                                              <p>55 7789 8909</p>
-                                         </div>
-                                      </div>
-                                      <div class="footer-social">
-                                         <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                         <a href="#"><i class="fab fa-twitter"></i></a>
-                                         <a href="#"> <i class="fab fa-linkedin"></i></a>
-                                         <a href=""><i class="fab fa-instagram"></i></a>
-                                     </div>
-                                  </div>
-                                </div>
-                             </div>
+ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  -->
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="utf-8" />
+     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+     <link rel="icon" type="image/png" href="../assets/img/favicon.ico">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+     <title>ViSor</title>
+     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+     <!--     Fonts and icons     -->
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+     <!-- CSS Files -->
+     <link href="{{ url_for('static', filename = 'styledashboard/assets/css/bootstrap.min.css') }}" rel="stylesheet" >
+     <link href="{{ url_for('static', filename = 'styledashboard/assets/css/light-bootstrap-dashboard.css') }} " rel="stylesheet" >
+     <!-- CSS Just for demo purpose, don't include it in your project -->
+     <link href="{{ url_for('static', filename = 'styledashboard/assets/css/demo.css')}}" rel="stylesheet" >
+ </head>
+ 
+ <body>
+     <div class="wrapper">
+ 
+         <div class="sidebar" data-image="{{ url_for('static', filename = 'styledashboard/assets/img/sidebar-5.jpg') }}">
 
-                         </div>
+             <div class="sidebar-wrapper">
+                 <div class="logo">
+                     <img src="{{ url_for('static', filename = 'styledashboard/assets/img/VISOR2021baja.jpg')}}" alt="" height="100" width="230">
+                 </div>
+                 <ul class="nav">
+                     <li class="nav-item ">
+                         <a class="nav-link" href="{{url_for('prueba')}}">
+                             <i class="nc-icon nc-chart-pie-35"></i>
+                             <p>Candidatos</p>
+                         </a>
+                     </li>
+                     <li>
+                         <a class="nav-link" href="{{url_for('ua')}}">
+                             <i class="nc-icon nc-circle-09"></i>
+                             <p>Opiniones</p>
+                         </a>
+                     </li>
+                     <li>
+                         <a class="nav-link" href="{{url_for('tabla')}}">
+                             <i class="nc-icon nc-notes"></i>
+                             <p>Prospectos</p>
+                         </a>
+                     </li>
+                 </ul>
+             </div>
+         </div>
+         <div class="main-panel">
+             <!-- Navbar -->
+             <nav class="navbar navbar-expand-lg " color-on-scroll="500">
+                 <div class="container-fluid">
+                     <a class="navbar-brand" href=""> Hola, Pamela </a>
+                     <button href="" class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                         <span class="navbar-toggler-bar burger-lines"></span>
+                         <span class="navbar-toggler-bar burger-lines"></span>
+                         <span class="navbar-toggler-bar burger-lines"></span>
+                     </button>
+                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                         
+                         <ul class="navbar-nav ml-auto">
+                             <li class="nav-item">
+                                 <a class="nav-link" href="">
+                                     <span class="no-icon">Cerrar sesión</span>
+                                 </a>
+                             </li>
+                         </ul>
                      </div>
                  </div>
-                 <!-- footer-bottom aera -->
-                 <div class="footer-bottom-area footer-bg">
-                     <div class="container">
-                         <div class="footer-border">
-                              <div class="row d-flex align-items-center">
-                                  <div class="col-xl-12 ">
-                                      <div class="footer-copy-right text-center">
-                                          <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-           ViSor &copy;<script>document.write(new Date().getFullYear());</script> Todos los derechos reservados
-           <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                                      </div>
-                                  </div>
-                              </div>
-                         </div>
-                     </div>
+             </nav>
+             <!-- End Navbar -->
+             {% block content %}
+             {% endblock %}
+             <footer class="footer">
+                 <div class="container-fluid">
+                     <nav>
+                         <p class="copyright text-center">
+                             © ViSor
+                             <script>
+                                 document.write(new Date().getFullYear())
+                             </script>
+                             
+                         </p>
+                     </nav>
                  </div>
-               </div>
-                <!-- Footer End-->
-
-            </footer>
-
-            <!-- JS here -->
-
-                <!-- All JS Custom Plugins Link Here here -->
-                <script src="{{url_for('static', filename='assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>
-                <!-- Jquery, Popper, Bootstrap -->
-                <script src="{{url_for('static', filename='assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/popper.min.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/bootstrap.min.js')}}"></script>
-                <!-- Jquery Mobile Menu -->
-                <script src="{{url_for('static', filename='assets/js/jquery.slicknav.min.js')}}"></script>
-
-                <!-- Jquery Slick , Owl-Carousel Plugins -->
-                <script src="{{url_for('static', filename='assets/js/owl.carousel.min.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/slick.min.js')}}"></script>
-                <!-- Date Picker -->
-                <script src="{{url_for('static', filename='assets/js/gijgo.min.js')}}"></script>
-                <!-- One Page, Animated-HeadLin -->
-                <script src="{{url_for('static', filename='assets/js/wow.min.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/animated.headline.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/jquery.magnific-popup.js')}}"></script>
-
-                <!-- Scrollup, nice-select, sticky -->
-                <script src="{{url_for('static', filename='assets/js/jquery.scrollUp.min.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/jquery.nice-select.min.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/jquery.sticky.js')}}"></script>
-
-                <!-- contact js -->
-                <script src="{{url_for('static', filename='assets/js/contact.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/jquery.form.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/jquery.validate.min.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/mail-script.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/jquery.ajaxchimp.min.js')}}"></script>
-
-                <!-- Jquery Plugins, main Jquery -->
-                <script src="{{url_for('static', filename='assets/js/plugins.js')}}"></script>
-                <script src="{{url_for('static', filename='assets/js/main.js')}}"></script>
-
-   </body>
-   </html>
+             </footer>
+         </div>
+     </div>
+ </body>
+ <!--   Core JS Files   -->
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/core/popper.min.js') }}" type="text/javascript"></script>
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/core/bootstrap.min.js') }}" type="text/javascript"></script>
+ <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/plugins/bootstrap-switch.js') }}"></script>
+ <!--  Chartist Plugin  -->
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/plugins/chartist.min.js') }}"></script>
+ <!--  Notifications Plugin    -->
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/plugins/bootstrap-notify.js') }}"></script>
+ <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/light-bootstrap-dashboard.js') }} " type="text/javascript"></script>
+ <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
+ <script src="{{ url_for('static', filename = 'styledashboard/assets/js/demo.js') }}"></script>
+ 
+ </html>
+ 

@@ -63,6 +63,17 @@ def load_user(user_id):
     # since the user_id is just the primary key of our user table, use it in the query for the user
     return Administrador.query.get(int(user_id))
 
+@app.route('/prueba')
+def prueba():
+    return render_template('dashboard/dashboard.html')
+
+@app.route('/tabla')
+def tabla():
+    return render_template('dashboard/table.html')
+
+@app.route('/ua')
+def ua():
+    return render_template('dashboard/user.html')
 
 @app.route('/login2', methods = ['GET', 'POST'])
 def login2():
@@ -71,18 +82,21 @@ def login2():
         password = request.form['password']
         user = Administrador.query.filter_by(email=email).first()
         if user is not None and user.check_password(password):
+            #Ir a la pantalla de inicio para los administradores
             login_user(user)
             return 'Ya estas logueado'
         else:
+            #Error al iniciar sesióm
             return render_template('loginP.html')
     else:
+        #Solamente se invocó al formulario del login
         return render_template('loginP.html')
 
 
 @app.route('/logout')
 def logout():
     logout_user()
-    return 'Cerraste sesión con éxito'
+    return render_template('landing_page/login.html')
 
 #@app.route('/createAdmin')
 def createAdmin():
@@ -130,7 +144,16 @@ def ingresar():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        user = Administrador.query.filter_by(email=email).first()
+        if user is not None and user.check_password(password):
+            #Ir a la pantalla de inicio para los administradores
+            login_user(user)
+            return render_template('')
+        else:
+            #Error al iniciar sesióm
+            return render_template('landing_page/login.html')
     else:
+        #Solamente se invocó al formulario del login
         return render_template('landing_page/login.html')
 
 
