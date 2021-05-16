@@ -80,7 +80,7 @@
 }
 
 .boxed-btn:hover {
-    background: blue;
+    background: black;
     color: #fff !important;
     border: 1px solid #ff5c97
 }
@@ -2138,6 +2138,41 @@ hr {
         padding-top: 40px
     }
 }
+
+.me-padding {
+    padding-top: 100px
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1600px) {
+    .me-padding {
+        padding-top: 50px
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .me-padding {
+        padding-top: 40px
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .me-padding {
+        padding-top: 40px
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .me-padding {
+        padding-top: 40px
+    }
+}
+
+@media (max-width: 767px) {
+    .me-padding {
+        padding-top: 40px
+    }
+}
+
 
 .visite-padding {
     padding-top: 160px;
@@ -6935,7 +6970,10 @@ b, sup, sub, u, del {
     right: 20px
 }
 
+/*
+
 .form-select {
+    overflow: auto;
     height: 40px;
     width: 100%
 }
@@ -6988,7 +7026,7 @@ b, sup, sub, u, del {
 
 .form-select .nice-select::after {
     right: 20px
-}
+}*/
 
 .mt-10 {
     margin-top: 10px

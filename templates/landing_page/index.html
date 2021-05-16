@@ -4,18 +4,19 @@
 
 {% block content %}
     <!-- We Create Start -->
-    <div class="we-create-area create-padding">
+    <div class="we-create-area choose-padding">
         <div class="container">
-            <div class="row d-flex align-items-start">
-                <div class="col-lg-6 col-md-12">
-                    <div class="we-create-img">
-                        <img src="{{ url_for('static', filename = 'assets/img/pam/portada.jpeg')}}" class="img1" alt="">
+            <div class="row d-flex justify-content-lg-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="we-create-cap">
+                        <h3>Somos tu mejor partner estratégico para tu marketing research.</h3>
                     </div>
                 </div>
-                <br>
-                <div class="col-lg-6 col-md-12">
-                    <div class="we-create-cap">
-                        <h3>SOMOS tu mejor partner estratégico para tu marketing research.</h3>
+            </div>
+            <div class="row d-flex align-items-start">
+                <div class="col-lg-12 col-md-12">
+                    <div class="we-create-img">
+                        <img src="{{ url_for('static', filename = 'assets/img/pam/portada.jpeg')}}" class="img1" alt="">
                     </div>
                 </div>
             </div>
@@ -33,56 +34,102 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-6 col-md-6">
                 <div class="single-do  text-center mb-30">
                     <div class="do-icon">
-                        <span  class="flaticon-tasks"></span>
+                        <i class="far fa-question-circle"></i>
+                        
                     </div>
                     <div class="do-caption">
                         <h4>Mistery Shopper</h4>
+                        <p class="text-justify">
+                        ¿Quieres evaluar el proceso de experiencia de marca, auditar tus puntos de venta, controlar la calidad de tus procesos? 
+                        </p>
+                        <p class="text-justify">
+                        ViSor cuenta con un equipo capacitado para realizar la tarea de Mystery Shopper, podemos entregarte evidencias de la realización de los mismos como videos, fotografías, audios, etc.
+                        </p>
+                        <p class="text-justify">
+                        Tenemos un equipo de análisis por lo cual podemos también entregarte el análisis completo de tu estudio ¡Cotízanos!
+                        </p>
                     </div>
-
+                    <div class="do-btn">
+                        <a href="{{ url_for('contacto') }}"><i class="ti-arrow-right"></i>Cotizar</a>
+                    </div>
                 </div>
             </div>
-             <div class="col-lg-2 col-md-6">
+             <div class="col-lg-6 col-md-6">
                 <div class="single-do  text-center mb-30">
                     <div class="do-icon">
-                        <span  class="flaticon-social-media-marketing"></span>
+                        <i class="far fa-edit"></i>
                     </div>
                     <div class="do-caption">
                         <h4>Encuestas</h4>
+                        <p class="text-justify">
+                        ViSor cuenta con supervisores de campo, por lo cual te ofrecemos el servicio de levantamiento de datos con la entera responsabilidad , honestidad y compromiso de que nuestro equipo realizará las encuestas. Las investigaciones laas llevamos a cabo de manera telefónica, virtual o presencial.
+                        </p>
+                        <p class="text-justify">
+                        Podemos apoyarte desde la realización del cuestionario, logística del levantamiento, codificación y captura hasta el  análisis de la información, trabajando con  partners que nos pueden ayudar a darte un servicio integral ¡Cotízanos!
+                        </p>
                     </div>
-
+                    <div class="do-btn">
+                        <a href="{{ url_for('contacto') }}"><i class="ti-arrow-right"></i>Cotizar</a>
+                    </div>
                 </div>
             </div>
-             <div class="col-lg-2 col-md-6">
+             <div class="col-lg-6 6col-md-6">
                 <div class="single-do text-center mb-30">
                     <div class="do-icon">
-                        <span  class="flaticon-project"></span>
+                        <i class="far fa-comments"></i>
                     </div>
                     <div class="do-caption">
                         <h4>Focus group</h4>
+                        <p class="text-justify">
+                            ViSor, te apoya a reclutar tu panel de participantes, que cumplan con los requisitos y perfil que necesitas para llevar a cabo tu Focus Group, para que esta técnica de investigación cualitativa resulte todo un <b>Éxito</b> es necesario garantizar que los participantes como el moderador son los adecuados ¡Cotízanos!
+                        </p>
                     </div>
-
+                    <div class="do-btn">
+                        <a href="{{ url_for('contacto') }}"><i class="ti-arrow-right"></i>Cotizar</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-6 col-md-6">
                     <div class="single-do text-center mb-30">
                         <div class="do-icon">
-                            <span  class="flaticon-project"></span>
-                        </div>
-                        <div class="do-caption">
-                            <h4>Entrevistas</h4>
-                        </div>
-                    </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                    <div class="single-do text-center mb-30">
-                        <div class="do-icon">
-                            <span  class="flaticon-project"></span>
+                                <i class="fas fa-search"></i>
                         </div>
                         <div class="do-caption">
                             <h4>Secondary research</h4>
+                            <p class="text-justify">
+                            ViSor, te apoya investigando, recopilando, organizando y analizando información de diversas fuentes;  
+                            como informes y estudios de agencias gubernamentales, asociaciones comerciales u otras empresas de la 
+                            industria, para los fines que lo requieras. 
+                            </p>
+                            <p class="text-justify">
+                            Este servicio para micros y pymes suele ser una buena opción para conocer el mercado y/o consumidor y
+                            así poder tomar decisiones de manera más rápida y asequible que la investigación primaria ¡Cotízanos!
+                            </p>
+                        </div>
+                        <div class="do-btn">
+                            <a href="{{ url_for('contacto') }}"><i class="ti-arrow-right"></i>Cotizar</a>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-12 col-md-6">
+                    <div class="single-do text-center mb-30">
+                        <div class="do-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <div class="do-caption">
+                            <h4>Entrevistas</h4>
+                            <p class="text-justify">
+                            Lideradas por un entrevistador especialmente capacitado, te permiten comprender en profundidad cómo piensan y sienten los consumidores para alcanzar objetivos de información a partir de una conversación.   
+                            </p>
+                            <p class="text-justify">
+                            ViSor se encarga de capacitar y obtener estas entrevistas, entregándote la data para su análisis. También contamos con partners que nos pueden ayudar a crear la entrevista, los filtros, y hacer el análisis que necesites para entender a tu consumidor.
+                            </p>
+                        </div>
+                        <div class="do-btn">
+                            <a href="{{ url_for('contacto') }}"><i class="ti-arrow-right"></i>Cotizar</a>
                         </div>
                     </div>
             </div>
@@ -132,7 +179,7 @@
                         <div class="we-create-cap">
                             <h3>¿Quieres compartir tus opiniones?</h3>
                             <p data-animation="fadeInLeft" data-delay=".6s">Genera ingresos extras compartiendo tus experiencias de productos y servicios. Haz clic en el siguiente botón y déjanos tus datos para poder contactarte.</p>
-                            <a href="{{ url_for('registro_opinion') }}" class="btn">Registrarme</a>
+                            <a href="{{ url_for('registro') }}" class="btn">Registrarme</a>
                         </div>
                     </div>
                 </div>
