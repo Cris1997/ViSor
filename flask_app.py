@@ -94,7 +94,7 @@ def createAdmin():
 @app.route('/')
 def index():
     if current_user.is_authenticated:
-        return render_template('dashboard/dashboard.html', name=current_user.name)
+        return render_template('dashboard/dashboard.html')
     else:
         return render_template('landing_page/index.html')
 

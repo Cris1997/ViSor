@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:100i,200,300,300i,400,500,600,700,800,900&display=swap");
 
-.form-control:focus {
+/* .form-control:focus {
     background-color: #fbfbfb;
     border-color: rgb(61, 11, 177);
 }
 .form-select:focus {
     background-color: #fbfbfb;
     border-color: rgb(61, 11, 177);
-}
+} */
 
 .img1{
     border-radius: 5%;
@@ -4931,7 +4931,7 @@ hr {
     margin-top: 0px
 }
 
-.blog_right_sidebar .search_widget .form-control {
+/* .blog_right_sidebar .search_widget .form-control {
     height: 50px;
     border-color: #f0e9ff;
     font-size: 13px;
@@ -4949,7 +4949,7 @@ hr {
     border-color: #f0e9ff;
     outline: 0;
     box-shadow: none
-}
+} */
 
 .blog_right_sidebar .search_widget .input-group button {
     background: #ff5c97;
@@ -4969,7 +4969,7 @@ hr {
     color: #999999
 }
 
-.blog_right_sidebar .newsletter_widget .form-control {
+/* .blog_right_sidebar .newsletter_widget .form-control {
     height: 50px;
     border-color: #f0e9ff;
     font-size: 13px;
@@ -4986,7 +4986,7 @@ hr {
     border-color: #f0e9ff;
     outline: 0;
     box-shadow: none
-}
+} */
 
 .blog_right_sidebar .newsletter_widget .input-group button {
     background: #fff;
@@ -5501,16 +5501,16 @@ hr {
     }
 }
 
-.comment-form .form-control {
+/* .comment-form .form-control {
     border: 1px solid #f0e9ff;
     border-radius: 5px;
     height: 48px;
     padding-left: 18px;
     font-size: 13px;
     background: transparent
-}
+} */
 
-.comment-form .form-control:focus {
+/* .comment-form .form-control:focus {
     outline: 0;
     box-shadow: none
 }
@@ -5522,7 +5522,7 @@ hr {
 
 .comment-form .form-control::placeholder {
     color: #777777
-}
+} */
 
 .comment-form textarea {
     padding-top: 18px;
@@ -5600,7 +5600,7 @@ hr {
     margin-bottom: 30px
 }
 
-.form-contact .form-control {
+/* .form-contact .form-control {
     border: 1px solid #e5e6e9;
     border-radius: 0px;
     height: 48px;
@@ -5617,7 +5617,7 @@ hr {
 .form-contact .form-control::placeholder {
     font-weight: 300;
     color: #999999
-}
+} */
 
 .form-contact textarea {
     border-radius: 0px;
@@ -6970,10 +6970,9 @@ b, sup, sub, u, del {
     right: 20px
 }
 
-/*
+
 
 .form-select {
-    overflow: auto;
     height: 40px;
     width: 100%
 }
@@ -7026,7 +7025,7 @@ b, sup, sub, u, del {
 
 .form-select .nice-select::after {
     right: 20px
-}*/
+}
 
 .mt-10 {
     margin-top: 10px
