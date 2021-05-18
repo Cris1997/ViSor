@@ -23,35 +23,35 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
-        
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
             <style>
 
                  .frame2{
-                     
+
                      padding: 1cm;
-                 
+
                  }
-  
+
                  hr.new5 {
                    border: 3px solid #6703b9;
                    border-radius: 5px;
                    width: 100%;
                  }
-                 
-                 
+
+
                  .row.form{
                      background-color: white
                  }
-                 
+
                  .encabezados{
                    color:  #6703b9;
-                 
+
                  }
 
                  .btn-outline-primary{
@@ -79,15 +79,15 @@
                   outline: none;
                   box-shadow: none !important;
                 }
-                 
-                
+
+
 
                  body{
                    background: linear-gradient(0deg, rgba(157,14,255,1) 0%, rgba(53,190,255,1) 38%, rgba(18,251,255,1) 58%, rgba(254,254,254,1) 82%);
                  }
-                 
+
                  </style>
-                 
+
    </head>
    <body>
       <script>
@@ -163,7 +163,7 @@
                         <div class="form-row">
                           <div class= "form-group col-md-3">
                               <label for="fecha">Fecha de nacimiento:</label>
-                              <input type="text" class="form-control" name="fecha" id="datepicker" placeholder="dd-mm-aaaa" value = "{{ request.form['fecha']}}"  required>
+                              <input type="text" class="form-control" name="fecha" id="" placeholder="dd/mm/aaaa" value = "{{ request.form['fecha']}}"  required>
                           </div>
                           <div class="form-group col-md-3">
                             <label for="edoCivil">Estado civíl:</label>
@@ -237,14 +237,14 @@
                         </div>
                         <div class= "form-row">
                             <div class="form-group col-md-4">
+                                <!--
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="customFile">
-                                    <label class="custom-file-label" for="customFile">Adjunta tu CV (Debe estar en formato PDF)</label>
+                                    <label class="custom-file-label" for="customFile" name="cv">Adjunta tu CV (Debe estar en formato PDF)</label>
                                   </div>
-                                <!--
+                                -->
                                 <label class="form-label" for="cv">Adjunta tu CV (Debe estar en formato PDF)</label>
                                 <input type="file" class="form-control" id="customFile" name="cv">
-                                -->
                             </div>
                         </div>
                         <div class="row">
@@ -276,22 +276,22 @@
                             </select>
                           </div>
                         </div>
-                
+
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="lugarExperiencia">¿En dónde realizaste esa experiencia previa? (Opcional)</label>
                                 <input type="text" class="form-control" name="lugarExperiencia" value="{{ request.form['lugarExperiencia'] }}">
                             </div>
-                            
+
                         </div>
                         <button type="submit" class="btn btn-outline-primary">Registrarme</button>
                       </form>
                 </div>
-            </div>       
+            </div>
         </div>
-    
+
         </main>
-   
+
 
             <!-- JS here -->
 

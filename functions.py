@@ -5,7 +5,7 @@ import datetime
 #Verificar que el usario tenga la mayoria de edad
 def verificaEdad(fechaStr):
 
-    format_str = '%d-%m-%Y' # The format
+    format_str = '%d/%m/%Y' # The format
     datetime_obj = datetime.datetime.strptime(fechaStr, format_str).date()
 
     hoy = datetime.date.today()

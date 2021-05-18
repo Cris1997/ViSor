@@ -94,7 +94,7 @@ def createAdmin():
 @app.route('/')
 def index():
     if current_user.is_authenticated:
-        return render_template('dashboard/dashboard.html')
+        return render_template('dashboard/dashboard.html', name=current_user.name)
     else:
         return render_template('landing_page/index.html')
 
@@ -184,7 +184,7 @@ def delete(id):
 @login_required
 def exportar():
     query_sets = Usuario.query.all()
-    column_names = ['id', 'name','fechaNacimiento', 'edoCivil','ciudad', 'email','telFijo','telCelular','medioEnterado', 'perfil', 'interes', 'expPrevia' ]
+    column_names = ['id', 'name','fechaNacimiento', 'edoCivil','ciudad', 'email','telFijo','telCelular','medioEnterado', 'perfil', 'expPrevia' ]
     return excel.make_response_from_query_sets(query_sets, column_names, "xls")
 
 
@@ -225,7 +225,6 @@ def registro():
         celular = request.form['celular']
         medioEnterado = request.form['medioEnterado']
         perfil = request.form['perfil']
-        interes = request.form['interes']
         lugarExperiencia = request.form['lugarExperiencia']
         perfil = request.form['perfil']
         file = request.files['cv']
@@ -264,24 +263,12 @@ def registro():
     mail.send(msg)
     #Save user into database
     fullname = name + ' ' + paterno + ' ' + materno
-    user = Usuario(name = fullname, fechaNacimiento = fecha, edoCivil = edoCivil, ciudad = ciudad, email = email, telFijo = fijo, telCelular = celular, nameCV = nameCV, password = randomPassword, tempPassword = 1, medioEnterado = medioEnterado, perfil = perfil, interes = interes, expPrevia = lugarExperiencia)
+    user = Usuario(name = fullname, fechaNacimiento = fecha, edoCivil = edoCivil, ciudad = ciudad, email = email, telFijo = fijo, telCelular = celular, nameCV = nameCV, password = randomPassword, tempPassword = 1, medioEnterado = medioEnterado, perfil = perfil, expPrevia = lugarExperiencia)
     db.session.add(user)
     db.session.commit()
     return render_template('emails/signupSuccess.html')
 
-@app.route('/registro_opinion', methods = ['GET', 'POST'])
-def registro_opinion():
-    if request.method == 'POST':
-        nombre  = request.form['name']
-        paterno = request.form['paterno']
-        materno = request.form['materno']
-        correo = request.form['correo']
-        gusto = request.form['gusto']
-        fechaNac = request.form['fecha']
-        edoCivil =  request.form['edoCivil']
-        return fechaNac
-    else:
-        return render_template('forms/registroOpinador.html')
+
 
 @app.route('/admin')
 def admin():
@@ -339,7 +326,7 @@ class Usuario(UserMixin,db.Model):
     perfil = db.Column(db.String(250))
     expPrevia = db.Column(db.String(500))
 
-    def __init__(self, name, fechaNacimiento, edoCivil, ciudad, email, telFijo, telCelular, nameCV, password, tempPassword, medioEnterado, perfil,interes,  expPrevia):
+    def __init__(self, name, fechaNacimiento, edoCivil, ciudad, email, telFijo, telCelular, nameCV, password, tempPassword, medioEnterado, perfil,  expPrevia):
         self.name = name
         self.fechaNacimiento = fechaNacimiento
         self.edoCivil = edoCivil
@@ -352,7 +339,6 @@ class Usuario(UserMixin,db.Model):
         self.tempPassword = tempPassword
         self.medioEnterado = medioEnterado
         self.perfil = perfil
-        self.interes = interes
         self.expPrevia = expPrevia
 
     def __repr__(self):
