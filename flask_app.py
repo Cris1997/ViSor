@@ -119,7 +119,7 @@ def contacto():
         ciudad = request.form['ciudad']
         consulta = request.form['consulta']
         msg = Message('Un usuario dejó sus datos en el portal para ser contactado', sender=("Nuevo contacto para ViSor", "visorcompany2021@gmail.com"), recipients = ["visorcompany2021@gmail.com"])
-        msg.html = render_template('emailContact.html', nombre = nombre, correo = correo, telefono = telefono, ciudad = ciudad,  consulta = consulta)
+        msg.html = render_template('emails/emailContact.html', nombre = nombre, correo = correo, telefono = telefono, ciudad = ciudad,  consulta = consulta)
         mail.send(msg)
         flash('Tu mensaje fue enviado correctamente, ViSor se pondrá en contacto contigo.')
         return render_template('landing_page/contacto.html')
