@@ -24,40 +24,27 @@
         }
 
         </style>
-        {% extends 'base.html' %}
+        {% extends 'base2.html' %}
             {% block content %}
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <span>{{ message }}</span>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
             <div class="container mt-5 mb-5 mx-auto ">
-
                 <br>
                 <br>
-                            <div id="login-row" class="row justify-content-center align-items-center">
-                                <div id="login-column" class="col-md-6 ">
-                                    <div id="login-box" class="col-md-12  my-class pt-5 pb-5 pr-5 pl-5" >
-                                        <form id="login-form" class="form" action="" method="">
-                                        <center>
-                                            <a href="{{url_for('index')}}">
-                                                <img src="{{url_for('static', filename='images/kleo-logo.png')}}" height="50" width="180">
-                                            </a>
-                                        </center>
-                                            <h1><p class="text-center textpurple mt-2 mb-3">¡Registro Exitoso!</p></h1>
-                                            <p class="text-sub size-14 text-center">Enviamos un correo electrónico a la dirección que nos proporcionaste para estar en contacto contigo. Esperamos tener buenas noticias para ti muy pronto.</p>
-                                            <div class="form-group d-flex justify-content-center">
-                                            </div>
-                                        </form>
-                                    </div>
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6 ">
+                        <div id="login-box" class="col-md-12  my-class pt-5 pb-5 pr-5 pl-5" >
+                            <form id="login-form" class="form" action="" method="">
+                            <center>
+                                <a href="{{url_for('index')}}">
+                                    <img src="{{url_for('static', filename='assets/img/logo/logo2.jpg')}}" height="100" width="180">
+                                </a>
+                            </center>
+                                <h1><p class="text-center textpurple mt-2 mb-3">¡Registro Exitoso!</p></h1>
+                                <p class="text-sub size-14 text-center">Enviamos un correo electrónico a la dirección que nos proporcionaste para estar en contacto contigo. Esperamos tener buenas noticias para ti muy pronto.</p>
+                                <div class="form-group d-flex justify-content-center">
                                 </div>
+                            </form>
+                         </div>
                         </div>
+                    </div>
             </div>
             {% endblock %}
