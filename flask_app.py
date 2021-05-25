@@ -26,12 +26,12 @@ login_manager.login_view = "ingresar"
 
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'visorcompany2021@gmail.com'
-app.config['MAIL_PASSWORD'] = 'domokunsupermami97'
+app.config['MAIL_USERNAME'] = os.getenv("MAILUSER")
+app.config['MAIL_PASSWORD'] = os.getenv("MAILPASSWORD")
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
-app.secret_key = "7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe"
+app.secret_key = os.getenv("SECRETKEY")
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['FOLDER_CV'] = FOLDER_CV
 app.config['ALLOWED_EXTENSIONS']= ALLOWED_EXTENSIONS
@@ -45,8 +45,8 @@ excel.init_excel(app)
 
 #DATABASE CONFIGURATION
 SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
-    username="CristianDeloya",
-    password="Domokun97",
+    username=os.getenv("USERDB"),
+    password=os.getenv("PASSWORDDB"),
     hostname="CristianDeloya.mysql.pythonanywhere-services.com",
     databasename="CristianDeloya$visor",
 )
@@ -70,10 +70,11 @@ def load_user(user_id):
 def prueba():
     return render_template('dashboard/dashboard.html')
 
-@app.route('/tabla')
-@login_required
-def tabla():
-    return render_template('dashboard/table.html')
+#@app.route('/tabla')
+#@login_required
+#def tabla():
+    users = Usuario.query.all()
+    return render_template('dashboard/table.html', users = users)
 
 @app.route('/ua')
 @login_required
@@ -84,7 +85,13 @@ def ua():
 
 #@app.route('/createAdmin')
 def createAdmin():
-    user = Administrador(name = "Cristian Rosales Deloya", email = "cristiandeloya@gmail.com", password = 'domokunsupermami97')
+    nombre  = "Paola Soria"
+    email = "paola.soria@gmail.com"
+    password = get_random_string()
+    user = Administrador(name = nombre, email = email, password = password)
+    msg = Message('Bienvenid@ a ViSor', sender=("Registro como administrador exitoso", "visorcompany2021@gmail.com"), recipients = [email,"cristiandeloya@gmail.com"])
+    msg.html = render_template('emails/correoAdmin.html', nombre = nombre, password = password)
+    mail.send(msg)
     db.session.add(user)
     db.session.commit()
     return 'Exito guardando el registro'
@@ -93,11 +100,10 @@ def createAdmin():
 
 @app.route('/')
 def index():
-    return render_template('emails/signupSuccess.html')
-    # if current_user.is_authenticated:
-    #     return render_template('dashboard/dashboard.html', name=current_user.name)
-    # else:
-    #     return render_template('landing_page/index.html')
+    if current_user.is_authenticated:
+        return redirect(url_for('usuarios'))
+    else:
+        return render_template('landing_page/index.html')
 
 @app.route('/conocenos')
 def conocenos():
@@ -119,7 +125,7 @@ def contacto():
         telefono = request.form['telefono']
         ciudad = request.form['ciudad']
         consulta = request.form['consulta']
-        msg = Message('Un usuario dejó sus datos en el portal para ser contactado', sender=("Nuevo contacto para ViSor", "visorcompany2021@gmail.com"), recipients = ["visorcompany2021@gmail.com"])
+        msg = Message('Un usuario dejó sus datos en el portal para ser contactado', sender=("Nuevo contacto para ViSor", os.getenv("MAILUSER")), recipients = ["contacto@visormexico.com.mx"])
         msg.html = render_template('emails/emailContact.html', nombre = nombre, correo = correo, telefono = telefono, ciudad = ciudad,  consulta = consulta)
         mail.send(msg)
         flash('Tu mensaje fue enviado correctamente, ViSor se pondrá en contacto contigo.')
@@ -136,9 +142,10 @@ def ingresar():
         if user is not None and user.check_password(password):
             #Ir a la pantalla de inicio para los administradores
             login_user(user)
-            return render_template('dashboard/dashboard.html')
+            return redirect(url_for('usuarios'))
         else:
             #Error al iniciar sesióm
+            flash('Usuario y/o contraseña incorrectos')
             return render_template('landing_page/login.html')
     else:
         #Solamente se invocó al formulario del login
@@ -147,15 +154,16 @@ def ingresar():
 @app.route('/logout')
 def logout():
     logout_user()
-    return render_template('landing_page/login.html')
+    flash('Cerraste sesión correctamente')
+    return redirect(url_for('ingresar'))
 
 #Login requires
 
 @app.route('/usuarios')
 @login_required
-def getUsers():
+def usuarios():
     users = Usuario.query.all()
-    return render_template('dashboard/users.html', users = users)
+    return render_template('dashboard/table.html', users = users)
 
 #Select user
 @app.route('/user/<id>')
@@ -166,9 +174,10 @@ def user(id):
     if user is None:
         users = Usuario.query.all()
         flash("La información del usuario no se encuentra disponible o no existe")
-        return render_template('dashboard/users.html', users = users)
+        return redirect(url_for('usuarios'))
     else:
-        return render_template('dashboard/userInfo.html', usuario = user)
+        return render_template('dashboard/user.html', user = user)
+        #return render_template('dashboard/userInfo.html', usuario = user)
 
 #Delete user
 @app.route('/deleteUser/<id>')
@@ -212,6 +221,8 @@ def download_file(filename):
                                filename, as_attachment=True)
 
 
+
+
 @app.route('/registro', methods=['GET','POST'])
 def registro():
     if request.method == 'POST':
@@ -226,6 +237,7 @@ def registro():
         celular = request.form['celular']
         medioEnterado = request.form['medioEnterado']
         perfil = request.form['perfil']
+        interes = ', '.join(request.form.getlist('interes'))
         lugarExperiencia = request.form['lugarExperiencia']
         perfil = request.form['perfil']
         file = request.files['cv']
@@ -264,7 +276,7 @@ def registro():
     mail.send(msg)
     #Save user into database
     fullname = name + ' ' + paterno + ' ' + materno
-    user = Usuario(name = fullname, fechaNacimiento = fecha, edoCivil = edoCivil, ciudad = ciudad, email = email, telFijo = fijo, telCelular = celular, nameCV = nameCV, password = randomPassword, tempPassword = 1, medioEnterado = medioEnterado, perfil = perfil, expPrevia = lugarExperiencia)
+    user = Usuario(name = fullname, fechaNacimiento = fecha, edoCivil = edoCivil, ciudad = ciudad, email = email, telFijo = fijo, telCelular = celular, nameCV = nameCV, password = randomPassword, tempPassword = 1, medioEnterado = medioEnterado, perfil = perfil,interes = interes, expPrevia = lugarExperiencia)
     db.session.add(user)
     db.session.commit()
     return render_template('emails/signupSuccess.html')
@@ -327,7 +339,7 @@ class Usuario(UserMixin,db.Model):
     perfil = db.Column(db.String(250))
     expPrevia = db.Column(db.String(500))
 
-    def __init__(self, name, fechaNacimiento, edoCivil, ciudad, email, telFijo, telCelular, nameCV, password, tempPassword, medioEnterado, perfil,  expPrevia):
+    def __init__(self, name, fechaNacimiento, edoCivil, ciudad, email, telFijo, telCelular, nameCV, password, tempPassword, medioEnterado, perfil,interes, expPrevia):
         self.name = name
         self.fechaNacimiento = fechaNacimiento
         self.edoCivil = edoCivil
@@ -339,6 +351,7 @@ class Usuario(UserMixin,db.Model):
         self.password = password
         self.tempPassword = tempPassword
         self.medioEnterado = medioEnterado
+        self.interes = interes
         self.perfil = perfil
         self.expPrevia = expPrevia
 

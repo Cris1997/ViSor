@@ -21,7 +21,7 @@
             <td>{{ user.perfil }}</td>
             <td>
                 {% set id = user.id %}
-                 {%  set cv = user.nameCV %}
+                {%  set cv = user.nameCV %}
 
                 <a class="btn btn-primary" href="{{ url_for('download_file', filename = cv ) }}" role="button" target="_blank"><i class="fas fa-download"></i></a>
                 <a class="btn btn-success" href="{{ url_for('user', id = id ) }}" role="button"><i class="fas fa-edit"></i></a>

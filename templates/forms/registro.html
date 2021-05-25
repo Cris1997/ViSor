@@ -178,40 +178,40 @@
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
-                            <label for="ciudad">Ciudad dónde radicas:</label>
+                            <label for="ciudad">Estado dónde radicas:</label>
                             <select name="ciudad" class="form-control"  value = "{{ request.form['ciudad']}}" required>
                               <option selected disabled value="0"></option>
-                              <option value="Aguascalientes">Aguascalientes</option>
-                              <option value="Campeche">Campeche</option>
-                              <option value="Chetumal">Chetumal</option>
-                              <option value="Chihuahua">Chihuahua</option>
-                              <option value="Chilpancingo">Chilpancingo</option>
                               <option value="Ciudad de México">Ciudad de México</option>
-                              <option value="Ciudad Victoria">Ciudad Victoria</option>
-                              <option value="Chetumal">Chetumal</option>
+                              <option value="Estado de México">Estado de México</option>
+                              <option value="Aguascalientes">Aguascalientes</option>
+                              <option value="Baja California">Baja California</option>
+                              <option value="Baja California Su">Baja California Sur</option>
+                              <option value="Campeche">Campeche</option>
+                              <option value="Chiapas">Chiapas</option>
+                              <option value="Chihuahua">Chihuahua</option>
+                              <option value="Coahuila">Coahuila</option>
                               <option value="Colima">Colima</option>
-                              <option value="Cuernavaca">Cuernavaca</option>
-                              <option value="Culiacán">Culiacán</option>
                               <option value="Durango">Durango</option>
                               <option value="Guanajuato">Guanajuato</option>
-                              <option value="Guadalajara">Guadalajara</option>
-                              <option value="Hermosillo">Hermosillo</option>
-                              <option value="La Paz">La Paz</option>
-                              <option value="Mérida">Mérida</option>
-                              <option value="Mexicali">Mexicali</option>
-                              <option value="Monterrey">Monterrey</option>
-                              <option value="Morelia">Morelia</option>
+                              <option value="Guerrero">Guerrero</option>
+                              <option value="Hidalgo">Hidalgo</option>
+                              <option value="Jalisco">Jalisco</option>
+                              <option value="Michoacán">Michoacán</option>
+                              <option value="Morelos">Morelos</option>
+                              <option value="Nayarit">Nayarit</option>
+                              <option value="Nuevo León">Nuevo León</option>
                               <option value="Oaxaca">Oaxaca</option>
-                              <option value="Pachuca">Pachuca</option>
                               <option value="Puebla">Puebla</option>
                               <option value="Querétaro">Querétaro</option>
-                              <option value="Saltillo">Saltillo</option>
+                              <option value="Quintana Roo">Quintana Roo</option>
                               <option value="San Luis Potosí">San Luis Potosí</option>
-                              <option value="Tepic">Tepic</option>
-                              <option value="Toluca">Toluca</option>
-                              <option value="Tuxtla Gutiérrez">Tuxtla Gutiérrez</option>
+                              <option value="Sinaloa">Sinaloa</option>
+                              <option value="Sonora">Sonora</option>
+                              <option value="Tabasco">Tabasco</option>
+                              <option value="Tamaulipas">Tamaulipas</option>
                               <option value="Tlaxcala">Tlaxcala</option>
-                              <option value="Villahermosa">Villahermosa</option>
+                              <option value="Veracruz">Veracruz</option>
+                              <option value="Yucatán">Yucatán</option>
                               <option value="Zacatecas">Zacatecas</option>
                             </select>
                           </div>
@@ -274,6 +274,33 @@
                               <option value="Ninguno">Ninguno</option>
                               <option value="Mystery Shopper, Encuestador y Entrevistador">Todos los anteriores</option>
                             </select>
+                          </div>
+                          <div class="form-group col-md-6">
+                             <label for="perfil">¿En qué te gustaría participar?</label>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Mystery Shopper" id="interes" name="interes">
+                              <label class="form-check-label" for="interes">
+                                Mystery Shopper
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Encuestador" id="interes" name="interes">
+                              <label class="form-check-label" for="interes">
+                                Encuestador
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Entrevistador-Preguntas a Profundidad" id="interes" name="interes">
+                              <label class="form-check-label" for="interes">
+                                Entrevistador-Preguntas a Profundidad
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Participante de sesiones" id="interes" name="interes" >
+                              <label class="form-check-label" for="interes">
+                                Participante de sesiones
+                              </label>
+                            </div>
                           </div>
                         </div>
 

@@ -23,34 +23,34 @@
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css">
-        
+
             <style>
                  .frame2{
-                     
+
                      padding: 1cm;
-                 
+
                  }
                  hr.new5 {
                    border: 3px solid #6703b9;
                    border-radius: 5px;
                    width: 100%;
                  }
-              
+
                  .row.form{
                      background-color: white
                  }
-                 
+
                  .encabezados{
                    color:  #6703b9;
-                 
+
                  }
-                 
+
                  body{
                    background: linear-gradient(0deg, rgba(157,14,255,1) 0%, rgba(53,190,255,1) 38%, rgba(18,251,255,1) 58%, rgba(254,254,254,1) 82%);
                  }
-                 
+
                  </style>
-                 
+
     </head>
    <body>
       <script>
@@ -72,101 +72,45 @@
         <!-- Preloader Start -->
 
         <main>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <span>{{ message }}</span>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-        <div class="formsignup container-fluid mx-auto pt-3 pl-5 pr-5 ">
-            <div class="frame2 border bg-white rounded">
-                <div class="row justify-content-center">
-                    <div class="col-md-auto">
-                        <a href="{{url_for('index')}}">
-                            <img src="{{ url_for('static', filename = 'assets/img/logo/logo2.jpg' )}}" height="50" class="img-fluid" width="300">
-                        </a>
-                    </div>
-                </div>
-                <br>
-                <h2>¿Sabías qué…? </h2>
-                <p>
-                  A todos nuestros colaboradores se les retribuye de 
-                  manera monetaria su participación, la cantidad depende del proyecto, gana 
-                  dinero desde tu casa o asistiendo a focus group, tu experiencia y conocimiento 
-                  de los productos y marcas SI tiene valor para nosotros.
-                </p>
-                <div class="row">
-                    <hr class="new5">
-                </div>
-                <div class="row">
-                  <h5 class="encabezados">Completa los siguientes campos</h5>
-                  <hr class="style14">
-                  <br>
-                </div>
-                <form method="POST" enctype="multipart/form-data">
-                        <div class="form-row">
-                          <div class="form-group col-md-4">
-                            <label for="name">Nombre(s):</label>
-                            <input type="text" class="form-control" name="name"  value = "{{ request.form['name']}}" required>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="paterno">Apellido Paterno:</label>
-                            <input type="text" class="form-control" name="paterno" value = "{{ request.form['paterno']}}" required>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="materno">Apellido Materno:</label>
-                            <input type="text" class="form-control" name="materno"  value = "{{ request.form['materno']}}"  required>
-                          </div>
-                        </div>
-                        <div class="form-row">
-                          <div class= "form-group col-md-4">
-                              <label for="fecha">Fecha de nacimiento:</label>
-                              <input type="text" class="form-control" name="fecha" id="datepicker" placeholder="dd-mm-aaaa" value = "{{ request.form['fecha']}}"  required>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="edoCivil">Estado civíl:</label>
-                            <select name="edoCivil" class="form-select" value = "{{ request.form['edoCivil']}}" required>
-                              <option value="">---</option>
-                              <option value="Soltero(a)">Soltero(a)</option>
-                              <option value="Casado(a)">Casado(a)</option>
-                              <option value="Divorciado(a)">Divorciado(a)</option>
-                              <option value="Viudo(a)">Viudo(a)</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="gusto">¿En qué te gustaría participar?</label>
-                              <select name="gusto" class="form-select" value = "{{ request.form['gusto']}}" >
-                                <option value="">---</option>
-                                <option value="Focus group">Focus group</option>
-                                <option value="Encuesta online">Encuesta online</option>
-                                <option value="Encuesta telefónica">Encuesta telefónica</option>
-                                <option value="Encuesta presencial">Encuesta presencial</option>
-                                <option value="Focus group, Encuesta online , Encuesta telefónica, Encuesta presencial ">Todos los anteriores</option>
-                              </select>
-                     </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                              <label for="correo">Correo electrónico</label>
-                              <input type="email" class="form-control" name="correo" value = "{{ request.form['correo']}}"  required>
+        <form method="POST" enctype="multipart/form-data">
+
+
+
+
+                          <div class="form-group col-md-6">
+                             <label for="perfil">¿En qué te gustaría participar?</label>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Mystery Shopper" id="interes" name="interes">
+                              <label class="form-check-label" for="interes">
+                                Mystery Shopper
+                              </label>
                             </div>
-                            
-                       
-                   </div>
-                        <button type="submit" class="btn btn-primary">Enviar mis datos</button>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Encuestador" id="interes" name="interes">
+                              <label class="form-check-label" for="interes">
+                                Encuestador
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Entrevistador-Preguntas a Profundidad" id="interes" name="interes">
+                              <label class="form-check-label" for="interes">
+                                Entrevistador-Preguntas a Profundidad
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="checkbox" value="Participante de sesiones" id="interes" name="interes" >
+                              <label class="form-check-label" for="interes">
+                                Participante de sesiones
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-outline-primary">Registrarme</button>
                       </form>
-                </div>
-            </div>       
-        </div>
-    
         </main>
-   
+
 
             <!-- JS here -->
 
